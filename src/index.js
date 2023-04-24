@@ -1,6 +1,6 @@
-import './css/styles.css';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 
@@ -19,6 +19,16 @@ function displayDay(day) {
     p.innerText = day.activities[key].name;
     document.getElementById("activity").append(p);
   });
+  printBlocks(day);
+}
+
+function printBlocks(day) {
+  let blocksDiv = document.getElementById("available");
+  for (let i = 1; i < day.available; i++) {
+    const blockDiv = document.createElement("div");
+    blockDiv.classList = "blocks";
+    blocksDiv.append(blockDiv);
+  }
 }
 
 function displayActivityInput() {

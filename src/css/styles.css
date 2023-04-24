@@ -1,3 +1,16 @@
 body {
   background-color: lightblue;
 } 
+
+#available {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blocks {
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  background-color: blue;
+}

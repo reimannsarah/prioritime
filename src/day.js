@@ -13,4 +13,9 @@ export default class Day {
     this.available--;
     this.activities[name].blocks++;
   }
+
+  subtractActivityBlocks(name) {
+    this.available++;
+    this.activities[name].blocks--;
+  }
 }

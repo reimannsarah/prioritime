@@ -1,17 +1,16 @@
 export default class Day {
+  // available is entered in hours and transposed into 15 minute segments
   constructor(available) {
-    this.available = available;
-    this.sections = {};
-    this.sectionId = 0;
+    this.available = available * 4;
+    this.activities = {};
   }
 
   addActivity(activity) {
-    this.sections[this.assignSectionId()] = activity;
+    this.activities[activity.name] = activity;
   }
 
-  assignSectionId() {
-    this.sectionId++;
-    return this.sectionId;
+  addActivityBlocks(name) {
+    this.available--;
+    this.activities[name].blocks++;
   }
-
 }

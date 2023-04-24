@@ -14,7 +14,6 @@ import Activity from './activity.js';
 function displayDay(day) {
   document.getElementById("available").innerText = day.available;
   let keys = Object.keys(day.activities);
-  
 
   keys.forEach(key => {
     const p = document.createElement("p");

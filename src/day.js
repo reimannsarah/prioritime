@@ -19,7 +19,11 @@ export default class Day {
   }
 
   subtractActivityBlocks(name) {
-    this.available++;
-    this.activities[name].blocks--;
+    if (this.activities[name].blocks >0) {
+      this.available++;
+      this.activities[name].blocks--;
+    } else {
+      return "aint nobody got time for dat";
+    }
   }
 }

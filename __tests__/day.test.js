@@ -35,4 +35,10 @@ describe('Day', () => {
     monday.addActivityBlocks("salad");
     expect(monday.available).toEqual(0);
   });
+
+  test('it should check if there are available blocks when subtractActivityBlocks()', () => {
+    monday.activities["salad"].blocks = 0;
+    monday.subtractActivityBlocks("salad");
+    expect(monday.activities["salad"].blocks).toEqual(0);
+  });
 });

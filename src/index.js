@@ -14,11 +14,14 @@ import Activity from './activity.js';
 function displayDay(day) {
   document.getElementById("available").innerText = day.available;
   let keys = Object.keys(day.activities);
+  
 
   keys.forEach(key => {
     const p = document.createElement("p");
     const addBtn = document.createElement("button");
     const removeBtn = document.createElement("button");
+    const blocks = document.createElement("div");
+    blocks.setAttribute("id", `${day.activities[key].name}-blocks`);
 
     addBtn.innerText = "Add Time";
     addBtn.setAttribute("id", "add-btn");
@@ -28,27 +31,31 @@ function displayDay(day) {
 
     p.setAttribute("id", day.activities[key].name)
     p.innerText = day.activities[key].name;
-    p.append(addBtn, removeBtn);
+    p.append(addBtn, removeBtn, blocks);
 
     addBtn.addEventListener("click", function() {
       day.addActivityBlocks(day.activities[key].name);
-      printBlocks(day, "available");
+      printBlocks(day.available, "available");
+      printBlocks(day.activities[key].blocks, `${day.activities[key].name}-blocks`);
     });
 
     removeBtn.addEventListener("click", function() {
       day.subtractActivityBlocks(day.activities[key].name);
-      printBlocks(day, "available");
+      printBlocks(day.available, "available");
+      printBlocks(day.activities[key].blocks, `${day.activities[key].name}-blocks`);
     });
-    
+
     document.getElementById("activity").append(p);
   });
-  printBlocks(day, "available");
+  printBlocks(day.available, "available");
 }
 
-function printBlocks(day, div) {
+
+
+function printBlocks(blockNums, div) {
   let blocksDiv = document.getElementById(div);
   blocksDiv.innerHTML = null;
-  for (let i = 1; i < day.available; i++) {
+  for (let i = 0; i < blockNums; i++) {
     const blockDiv = document.createElement("div");
     blockDiv.classList = "blocks";
     blocksDiv.append(blockDiv);
@@ -82,4 +89,4 @@ function handleFormSubmission(e) {
 }
 
 document.querySelector("form").addEventListener("submit", handleFormSubmission);
-document.getElementById("add-activity").addEventListener("click", displayActivityInput)
+document.getElementById("add-activity").addEventListener("click", displayActivityInput);

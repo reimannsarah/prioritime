@@ -14,18 +14,38 @@ import Activity from './activity.js';
 function displayDay(day) {
   document.getElementById("available").innerText = day.available;
   let keys = Object.keys(day.activities);
-  document.getElementById("activity").innerText = day.activities[keys[0]].name;
+  keys.forEach(key => {
+    const p = document.createElement("p");
+    p.innerText = day.activities[key].name;
+    document.getElementById("activity").append(p);
+  });
+}
 
+function displayActivityInput() {
+  const form = document.querySelector("#activity1");
+  const newInput = document.createElement("input");
+  const label = document.createElement("label");
+
+  newInput.type = "text";
+  newInput.name = "activities"
+  label.innerText = "Activity: ";
+  form.after(label, newInput);
 }
 
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
-  const userActivity = document.getElementById("activity1").value;
+  const userActivity = document.querySelectorAll("input[name='activities']");
+
   let today = new Day(userFreeTime);
-  let activity = new Activity(userActivity);
-  today.addActivity(activity);
+
+  userActivity.forEach(element => {
+    let activity = new Activity(element.value);
+    today.addActivity(activity);
+  });
+
   displayDay(today);
 }
 
 document.querySelector("form").addEventListener("submit", handleFormSubmission);
+document.getElementById("add-activity").addEventListener("click", displayActivityInput)

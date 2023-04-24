@@ -23,10 +23,16 @@ describe('Day', () => {
     expect(monday.activities["salad"].blocks).toEqual(1);
   });
 
-  test('it should subtract one from activity bloack and add one to day available', () => {
+  test('it should subtract one from activity block and add one to day available', () => {
     monday.addActivityBlocks("salad");
     monday.subtractActivityBlocks("salad");
     expect(monday.available).toEqual(20);
     expect(monday.activities["salad"].blocks).toEqual(0);
+  });
+
+  test('it should check if there are available blocks when addActivityBlocks()', () => {
+    monday.available = 0;
+    monday.addActivityBlocks("salad");
+    expect(monday.available).toEqual(0);
   });
 });

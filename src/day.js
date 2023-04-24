@@ -10,8 +10,12 @@ export default class Day {
   }
 
   addActivityBlocks(name) {
-    this.available--;
-    this.activities[name].blocks++;
+    if (this.available > 0) {
+      this.available--;
+      this.activities[name].blocks++;
+    } else {
+      return "oh you bad";
+    }
   }
 
   subtractActivityBlocks(name) {

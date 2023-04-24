@@ -14,16 +14,40 @@ import Activity from './activity.js';
 function displayDay(day) {
   document.getElementById("available").innerText = day.available;
   let keys = Object.keys(day.activities);
+
   keys.forEach(key => {
     const p = document.createElement("p");
+    const addBtn = document.createElement("button");
+    const removeBtn = document.createElement("button");
+
+    addBtn.innerText = "Add Time";
+    addBtn.setAttribute("id", "add-btn");
+    
+    removeBtn.innerText = "Delete Time";
+    removeBtn.setAttribute("id", "remove-btn");
+
+    p.setAttribute("id", day.activities[key].name)
     p.innerText = day.activities[key].name;
+    p.append(addBtn, removeBtn);
+
+    addBtn.addEventListener("click", function() {
+      day.addActivityBlocks(day.activities[key].name);
+      printBlocks(day, "available");
+    });
+
+    removeBtn.addEventListener("click", function() {
+      day.subtractActivityBlocks(day.activities[key].name);
+      printBlocks(day, "available");
+    });
+    
     document.getElementById("activity").append(p);
   });
-  printBlocks(day);
+  printBlocks(day, "available");
 }
 
-function printBlocks(day) {
-  let blocksDiv = document.getElementById("available");
+function printBlocks(day, div) {
+  let blocksDiv = document.getElementById(div);
+  blocksDiv.innerHTML = null;
   for (let i = 1; i < day.available; i++) {
     const blockDiv = document.createElement("div");
     blockDiv.classList = "blocks";

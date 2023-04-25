@@ -8,7 +8,7 @@ describe('Day', () => {
 
   beforeEach(() => {
     available = 5;
-    monday = new Day(available);
+    monday = new Day("monday", available);
     activity = new Activity("salad");
     monday.addActivity(activity);
   });

@@ -30,17 +30,28 @@
     </form>
   </div>
 
+
   <form id="free-time-form">
+    <select id="dayOf">
+      <option selected disabled>Please select a day</option>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+      <option value="saturday">Saturday</option>
+      <option value="sunday">Sunday</option>
+    </select>
     <label for="free-time">Enter your free time:</label>
-    <input type="number" id="free-time">
+    <input type="number" id="free-time" onfocus="this.value=''">
     <button type="submit">Prioritize me, Captain!</button>
   </form>
   
   <div id="output">
-    <div id="available"></div>
     <div id="activity"></div>
     <form id="activForm"></form>
   </div>
+  <div id="week"></div>
   <div id="goal-list"></div>
 </body>
 </html>

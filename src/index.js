@@ -8,33 +8,38 @@ import Week from './week';
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
 
-// function handleFormSubmission(e) {
-//   e.preventDefault();
-
-//   const userFreeTime = document.getElementById("free-time").value;
-//   document.querySelector("#error-msg").innerText = null;
-//   try {
-//     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
-//     let today = new Day(validateUserFreeTime);
-//     displayDay(today);
-//   } catch (error) {
-//     printError(error);
-//   }
-// }
-
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
-  //add dropdown menu and get value from menu to pass in as name to Day object
   const dayOf = document.getElementById("dayOf").value;
-  //change variable to 'newDay' instead of 'today' and pass in dayOf variable for name
-  let newDay = new Day(dayOf, userFreeTime);
-  //instantiate new Week and add Day to it
-  newWeek.addDay(newDay);
-  //change argument from 'today' to 'newDay'
-  // displayDay(newDay);
-  displayWeek(newDay);
+  try {
+    // let validateDay = checkForDayInstance(dayOf);
+    let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
+    let newDay = new Day(dayOf, validateUserFreeTime);
+    newWeek.addDay(newDay);
+    displayWeek(newDay);
+  } catch(error) {
+    printError(error);
+  }
 }
+
+// function checkForDayInstance(value) {
+//   const daysToCheck = document.querySelector("#week").childNodes;
+//   if (daysToCheck.length === 0) {
+//     return value;
+//   } else {
+//     console.log("its in here!")
+//     daysToCheck.forEach(card => {
+//       if (card.id === value) {
+//         const errorMsg = `You already have that day!`;
+//         throw new Error(errorMsg);
+//       } else {
+//         console.log("and in here!")
+//         return value;
+//       }
+//     });
+//   }
+// }
 
 function displayWeek(day) {
   let weekDiv = document.getElementById("week");
@@ -140,14 +145,14 @@ function printBlocks(blockNums, div) {
 
 // error handling
 
-// function checkUserFreeTimeValue(value) {
-//   if (value <= 24 && value > 0) {
-//     return value;
-//   } else {
-//     const errorMsg = `Not a valid input`;
-//     throw new Error(errorMsg);
-//   }
-// }
+function checkUserFreeTimeValue(value) {
+  if (value <= 24 && value > 0) {
+    return value;
+  } else {
+    const errorMsg = `Not a valid input`;
+    throw new Error(errorMsg);
+  }
+}
 
 
 function checkUserActivityInput(value) {

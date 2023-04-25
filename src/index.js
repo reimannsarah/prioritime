@@ -129,13 +129,6 @@ function exitPopUp() {
   document.querySelector("#info-popup").classList = "hidden";
 }
 
-function clearForm() {
-  const inputs = document.querySelectorAll("input[name='priorities']");
-  inputs.forEach(input => {
-    input.value = null;
-  });
-}
-
 function addPriorityInput() {
   const div = document.querySelector("#info-popup");
   const li = document.createElement("li");
@@ -155,7 +148,6 @@ function displayInfoPopUp() {
   infoDiv.querySelector("#priority-list").addEventListener('submit', function (e) {
     displayPrioritiesList(e);
     exitPopUp();
-    clearForm();
   });
 }
 

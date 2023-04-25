@@ -73,7 +73,7 @@ function printBlocks(blockNums, div) {
 }
 
 function displayActivityInput(day) {
-  const acitivityForm = document.getElementById("activForm");
+  const activityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");
@@ -86,9 +86,9 @@ function displayActivityInput(day) {
 
   label.innerText = "Activity: ";
 
-  acitivityForm.append(label, newInput, actButton);
+  activityForm.append(label, newInput, actButton);
 
-  acitivityForm.addEventListener("submit", function(e) {
+  activityForm.addEventListener("submit", function(e) {
     getUserInputActivity(e, day);
   });
 }

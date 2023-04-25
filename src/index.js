@@ -8,8 +8,23 @@ import Week from './week';
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
 
+// function handleFormSubmission(e) {
+//   e.preventDefault();
+
+//   const userFreeTime = document.getElementById("free-time").value;
+//   document.querySelector("#error-msg").innerText = null;
+//   try {
+//     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
+//     let today = new Day(validateUserFreeTime);
+//     displayDay(today);
+//   } catch (error) {
+//     printError(error);
+//   }
+// }
+
 function handleFormSubmission(e) {
   e.preventDefault();
+  clearOutputField();
   const userFreeTime = document.getElementById("free-time").value;
   //add dropdown menu and get value from menu to pass in as name to Day object
   const dayOf = document.getElementById("dayOf").value;
@@ -70,19 +85,26 @@ function displayActivityInput(day) {
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector("input[name='activities']").value;
-  let activity = new Activity(userActivity);
-  day.addActivity(activity);
-  displayActivities(day, activity);
-}
-
-function checkUserFreeTimeValue(value) {
-  if (value <= 24 && value > 0) {
-    return value;
-  } else {
-    const errorMsg = `Not a valid input`;
-    throw new Error(errorMsg);
+  document.querySelector("input[name='activities']").value = null;
+  document.querySelector("#error-msg").innerText = null;
+  try {
+    let validateUserActivity = checkUserActivityInput(userActivity);
+    let activity = new Activity(validateUserActivity);
+    day.addActivity(activity);
+    displayActivities(day, activity);
+  } catch (error) {
+    printError(error);
   }
 }
+
+// function checkUserFreeTimeValue(value) {
+//   if (value <= 24 && value > 0) {
+//     return value;
+//   } else {
+//     const errorMsg = `Not a valid input`;
+//     throw new Error(errorMsg);
+//   }
+// }
 
 function checkUserActivityInput(value) {
   if (value === null || value === '') {
@@ -98,6 +120,8 @@ function printError(msg) {
 }
 
 function displayActivities(day, activity) {
+  console.log(day.available)
+  console.log(activity)
   const p = document.createElement("p");
   const addBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
@@ -115,19 +139,20 @@ function displayActivities(day, activity) {
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function() {
     day.addActivityBlocks(activity.name);
-    printBlocks(day.available, "available");
+    console.log(activity)
+    printBlocks(day.available, "week");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
   removeBtn.addEventListener("click", function() {
     day.subtractActivityBlocks(activity.name);
-    printBlocks(day.available, "available");
+    printBlocks(day.available, "week");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
   document.getElementById("activity").append(p);
 }
 
-function printBlocks(blockNums) {
-  let blocksDiv = document.getElementById("week");
+function printBlocks(blockNums, div) {
+  let blocksDiv = document.getElementById(div);
   // blocksDiv.innerHTML = null;
   for (let i = 0; i < blockNums; i++) {
     const blockDiv = document.createElement("div");
@@ -136,42 +161,29 @@ function printBlocks(blockNums) {
   }
 }
 
-function displayActivityInput(day) {
-  const activityForm = document.getElementById("activForm");
-  activityForm.innerHTML = null;
-  const newInput = document.createElement("input");
-  const label = document.createElement("label");
-  const actButton = document.createElement("button");
+// function displayActivityInput(day) {
+//   const activityForm = document.getElementById("activForm");
+//   activityForm.innerHTML = null;
+//   const newInput = document.createElement("input");
+//   const label = document.createElement("label");
+//   const actButton = document.createElement("button");
 
-  actButton.innerText = "Submit";
-  actButton.id = "add-activity";
+//   actButton.innerText = "Submit";
+//   actButton.id = "add-activity";
 
-  newInput.type = "text";
-  newInput.name = "activities";
+//   newInput.type = "text";
+//   newInput.name = "activities";
 
-  label.innerText = "Activity: ";
+//   label.innerText = "Activity: ";
 
-  activityForm.append(label, newInput, actButton);
+//   activityForm.append(label, newInput, actButton);
 
-  activityForm.addEventListener("submit", function (e) {
-    getUserInputActivity(e, day);
-  });
-}
+//   activityForm.addEventListener("submit", function (e) {
+//     getUserInputActivity(e, day);
+//   });
+// }
 
-function getUserInputActivity(e, day) {
-  e.preventDefault();
-  let userActivity = document.querySelector("input[name='activities']").value;
-  document.querySelector("input[name='activities']").value = null;
-  document.querySelector("#error-msg").innerText = null;
-  try {
-    let validateUserActivity = checkUserActivityInput(userActivity);
-    let activity = new Activity(validateUserActivity);
-    day.addActivity(activity);
-    displayActivities(day, activity);
-  } catch (error) {
-    printError(error);
-  }
-}
+
 
 function displayPrioritiesList(e) {
   e.preventDefault();
@@ -217,23 +229,10 @@ function displayInfoPopUp() {
 }
 
 function clearOutputField() {
-  document.querySelector("#available").innerHTML = null;
+  document.querySelector("#week").innerHTML = null;
   document.querySelector("#activity").innerHTML = null;
 }
 
-function handleFormSubmission(e) {
-  e.preventDefault();
-  clearOutputField();
-  const userFreeTime = document.getElementById("free-time").value;
-  document.querySelector("#error-msg").innerText = null;
-  try {
-    let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
-    let today = new Day(validateUserFreeTime);
-    displayDay(today);
-  } catch (error) {
-    printError(error);
-  }
-}
 
 window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);

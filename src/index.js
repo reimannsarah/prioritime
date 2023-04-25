@@ -18,47 +18,51 @@ function handleFormSubmission(e) {
   //instantiate new Week and add Day to it
   newWeek.addDay(newDay);
   //change argument from 'today' to 'newDay'
-  displayDay(newDay);
+  // displayDay(newDay);
   displayWeek(newWeek);
   console.log(newWeek);
 }
 
 function displayWeek(week) {
+  let weekDiv = document.getElementById("week");
+  weekDiv.innerHTML = null;
   const weekArray = Object.keys(week);
-  let div = document.getElementById("day");
   weekArray.forEach(day => {
     if (week[day].name) {
-    let p = document.createElement("p");
-    p.innerHTML = week[day].name;
-    div.append(p);
+      let dayDiv = document.createElement("div");
+      let p = document.createElement("p");
+      p.innerHTML = week[day].name.toUpperCase();
+      weekDiv.append(dayDiv, p);
+      printBlocks(week[day].available);
+      displayActivityInput(week[day]);
     }
-  })
+  });
 }
 
 
-function displayDay(day) {
-  displayActivityInput(day);
-  printBlocks(day.available, "available");
-}
+// function displayDay(day) {
+//   displayActivityInput(day);
+//   printBlocks(day.available, "available");
+// }
 
 function displayActivityInput(day) {
-  const acitivityForm = document.getElementById("activForm");
+  const activityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");
-  
+
   actButton.innerText = "Submit";
   actButton.id = "add-activity";
-  
+
   newInput.type = "text";
   newInput.name = "activities";
-  
+
   label.innerText = "Activity: ";
-  
-  acitivityForm.append(label, newInput, actButton);
-  
+
+  activityForm.append(label, newInput, actButton);
+
   // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
-  acitivityForm.addEventListener("submit", function(e) {
+  activityForm.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
 }
@@ -77,10 +81,10 @@ function displayActivities(day, activity) {
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
   blocks.setAttribute("id", `${activity.name}-blocks`);
-  
+
   addBtn.innerText = "+";
   addBtn.setAttribute("id", "add-btn");
-  
+
   removeBtn.innerText = "-";
   removeBtn.setAttribute("id", "remove-btn");
 
@@ -88,13 +92,13 @@ function displayActivities(day, activity) {
   p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
 
-  addBtn.addEventListener("click", function() {
+  addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
     printBlocks(day.available, "available");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
 
-  removeBtn.addEventListener("click", function() {
+  removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
     printBlocks(day.available, "available");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
@@ -102,9 +106,9 @@ function displayActivities(day, activity) {
   document.getElementById("activity").append(p);
 }
 
-function printBlocks(blockNums, div) {
-  let blocksDiv = document.getElementById(div);
-  blocksDiv.innerHTML = null;
+function printBlocks(blockNums) {
+  let blocksDiv = document.getElementById("week");
+  // blocksDiv.innerHTML = null;
   for (let i = 0; i < blockNums; i++) {
     const blockDiv = document.createElement("div");
     blockDiv.classList = "blocks";
@@ -112,7 +116,7 @@ function printBlocks(blockNums, div) {
   }
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   document.querySelector("form").addEventListener("submit", handleFormSubmission);
 });
 

@@ -14,7 +14,7 @@
   position: fixed;
   top: 10%;
   left: 5%;
-  background-color: blue;
+  background-color: lightseagreen;
   padding: 20px;
 }
 
@@ -26,7 +26,13 @@
   height: 40px;
   font-size: 18px;
   border-radius: 50%;
-  background-color: red;
+  background-color: coral;
+  float: right;
+}
+
+#add-more-inputs {
+  float: none;
+  margin: 10px;
 }
 
 #exit-popup:hover,

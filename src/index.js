@@ -97,6 +97,7 @@ function getUserInputActivity(e, day) {
     printError(error);
   }
 }
+import Storage from './storage.js';
 
 function displayActivities(day, activity) {
   const p = document.createElement("p");
@@ -113,7 +114,7 @@ function displayActivities(day, activity) {
   removeBtn.setAttribute("id", "remove-btn");
 
   p.setAttribute("id", activity.name);
-  p.innerText = activity.name;
+  p.innerText = activity.name; 
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);

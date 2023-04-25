@@ -88,22 +88,22 @@ function displayActivityInput(day) {
 
   activityForm.append(label, newInput, actButton);
 
-
   activityForm.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
 }
-// 
+
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector("input[name='activities']").value;
+  document.querySelector("input[name='activities']").value = null;
   document.querySelector("#error-msg").innerText = null;
   try {
     let validateUserActivity = checkUserActivityInput(userActivity);
     let activity = new Activity(validateUserActivity);
     day.addActivity(activity);
     displayActivities(day, activity);
-  } catch(error) {
+  } catch (error) {
     printError(error);
   }
 }
@@ -111,13 +111,15 @@ function getUserInputActivity(e, day) {
 function displayPrioritiesList(e) {
   e.preventDefault();
   const goalDiv = document.querySelector('#goal-list');
+  goalDiv.innerHTML = null;
   const ol = document.createElement("ol");
   goalDiv.append(ol);
 
   const items = document.querySelectorAll("input[name='priorities']");
   items.forEach(item => {
+    let listValue = checkUserActivityInput(item.value);
     const li = document.createElement("li");
-    li.innerText = item.value;
+    li.innerText = listValue;
     ol.append(li);
   });
 }
@@ -164,7 +166,7 @@ function handleFormSubmission(e) {
     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
     let today = new Day(validateUserFreeTime);
     displayDay(today);
-  } catch(error) {
+  } catch (error) {
     printError(error);
   }
 }

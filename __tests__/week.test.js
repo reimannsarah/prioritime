@@ -1,7 +1,8 @@
-import { Week } from week.js;
+import { Week } from '../src/week.js';
 
-describe 'Week', () => {
-    test('it should create a new instance of week one key of Monday')
+describe('Week', () => {
+  test('it should create a new instance of week one key of Monday', () => {
     let newWeek = new Week();
-    expect(newWeek).toEqual(Week {"Monday": undefined});
-}
+    expect(newWeek).toEqual({"monday":{}});
+  })
+});

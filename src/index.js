@@ -5,11 +5,20 @@ import Day from './day.js';
 import Activity from './activity.js';
 
 function checkUserFreeTimeValue(value) {
-  if (value <= 24) {
+  if (value <= 24 && value > 0) {
     return value;
   } else {
     const errorMsg = `Not a valid input`;
     throw new Error(errorMsg);
+  }
+}
+
+function checkUserActivityInput(value) {
+  if (value === null) {
+    const errorMsg = `Not a valid activity input`;
+    throw new Error(errorMsg);
+  } else {
+    return value;
   }
 }
 

@@ -4,6 +4,7 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 import Week from './week';
+// import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
@@ -97,7 +98,7 @@ function getUserInputActivity(e, day) {
     printError(error);
   }
 }
-import Storage from './storage.js';
+
 
 function displayActivities(day, activity) {
   const p = document.createElement("p");

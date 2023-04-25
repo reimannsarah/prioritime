@@ -117,10 +117,11 @@ function displayPrioritiesList(e) {
 
   const items = document.querySelectorAll("input[name='priorities']");
   items.forEach(item => {
-    let listValue = checkUserActivityInput(item.value);
-    const li = document.createElement("li");
-    li.innerText = listValue;
-    ol.append(li);
+    if (item.value) {
+      const li = document.createElement("li");
+      li.innerText = item.value;
+      ol.append(li);
+    }
   });
 }
 
@@ -158,8 +159,14 @@ function displayInfoPopUp() {
   });
 }
 
+function clearOutputField() {
+  document.querySelector("#available").innerHTML = null;
+  document.querySelector("#activity").innerHTML = null;
+}
+
 function handleFormSubmission(e) {
   e.preventDefault();
+  clearOutputField();
   const userFreeTime = document.getElementById("free-time").value;
   document.querySelector("#error-msg").innerText = null;
   try {

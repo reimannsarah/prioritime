@@ -13,6 +13,10 @@ function checkUserFreeTimeValue(value) {
   }
 }
 
+function printError(msg) {
+  document.querySelector("#error-msg").innerText = msg.message;
+}
+
 function displayActivities(day, activity) {
   const p = document.createElement("p");
   const addBtn = document.createElement("button");
@@ -91,8 +95,13 @@ function getUserInputActivity(e, day) {
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
-  let today = new Day(userFreeTime);
-  displayDay(today);
+  try {
+    let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
+    let today = new Day(validateUserFreeTime);
+    displayDay(today);
+  } catch(error) {
+    printError(error);
+  }
 }
 
 window.addEventListener("load", function() {

@@ -3,7 +3,7 @@ body {
 } 
 
 #available, 
-p>div {
+#week {
   display: flex;
   flex-wrap: wrap;
 }

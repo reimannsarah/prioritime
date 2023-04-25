@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
+import Storage from './storage.js';
 
 function displayActivities(day, activity) {
   const p = document.createElement("p");
@@ -18,7 +19,7 @@ function displayActivities(day, activity) {
   removeBtn.setAttribute("id", "remove-btn");
 
   p.setAttribute("id", activity.name);
-  p.innerText = activity.name;
+  p.innerText = activity.name; 
   p.append(addBtn, removeBtn, blocks);
 
   addBtn.addEventListener("click", function() {
@@ -51,7 +52,7 @@ function printBlocks(blockNums, div) {
 }
 
 function displayActivityInput(day) {
-  const acitivityForm = document.getElementById("activForm");
+  const activityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");
@@ -64,10 +65,10 @@ function displayActivityInput(day) {
 
   label.innerText = "Activity: ";
 
-  acitivityForm.append(label, newInput, actButton);
+  activityForm.append(label, newInput, actButton);
 
   // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
-  acitivityForm.addEventListener("submit", function(e) {
+  activityForm.addEventListener("submit", function(e) {
     getUserInputActivity(e, day);
   });
 }
@@ -86,6 +87,7 @@ function handleFormSubmission(e) {
   let today = new Day(userFreeTime);
   // display user's free time as blocks
   displayDay(today);
+  console.log(Storage.getData("johnny"));
 }
 
 window.addEventListener("load", function() {

@@ -14,7 +14,7 @@ function checkUserFreeTimeValue(value) {
 }
 
 function checkUserActivityInput(value) {
-  if (value === null) {
+  if (value === null || value === '') {
     const errorMsg = `Not a valid activity input`;
     throw new Error(errorMsg);
   } else {
@@ -96,9 +96,14 @@ function displayActivityInput(day) {
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector("input[name='activities']").value;
-  let activity = new Activity(userActivity);
-  day.addActivity(activity);
-  displayActivities(day, activity);
+  try {
+    let validateUserActivity = checkUserActivityInput(userActivity);
+    let activity = new Activity(validateUserActivity);
+    day.addActivity(activity);
+    displayActivities(day, activity);
+  } catch(error) {
+    printError(error);
+  }
 }
 
 function handleFormSubmission(e) {

@@ -96,6 +96,7 @@ function displayActivityInput(day) {
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector("input[name='activities']").value;
+  document.querySelector("#error-msg").innerText = null;
   try {
     let validateUserActivity = checkUserActivityInput(userActivity);
     let activity = new Activity(validateUserActivity);

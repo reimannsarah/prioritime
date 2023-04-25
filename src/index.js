@@ -4,13 +4,6 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 
-// Business Logic
-
-
-
-
-// UI Logic
-
 function displayActivities(day, activity) {
   const p = document.createElement("p");
   const addBtn = document.createElement("button");
@@ -24,7 +17,7 @@ function displayActivities(day, activity) {
   removeBtn.innerText = "-";
   removeBtn.setAttribute("id", "remove-btn");
 
-  p.setAttribute("id", activity.name)
+  p.setAttribute("id", activity.name);
   p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
 
@@ -58,7 +51,7 @@ function printBlocks(blockNums, div) {
 }
 
 function displayActivityInput(day) {
-  const acitivityForm =   document.getElementById("activForm");
+  const acitivityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");
@@ -75,7 +68,7 @@ function displayActivityInput(day) {
 
   // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
   acitivityForm.addEventListener("submit", function(e) {
-    getUserInputActivity(e, day)
+    getUserInputActivity(e, day);
   });
 }
 // 
@@ -87,7 +80,6 @@ function getUserInputActivity(e, day) {
   displayActivities(day, activity);
 }
 
-// get value of user's free-time
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;

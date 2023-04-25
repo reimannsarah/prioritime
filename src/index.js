@@ -13,7 +13,7 @@ function displayActivities(day, activity) {
 
   addBtn.innerText = "+";
   addBtn.setAttribute("id", "add-btn");
-  
+
   removeBtn.innerText = "-";
   removeBtn.setAttribute("id", "remove-btn");
 
@@ -21,13 +21,13 @@ function displayActivities(day, activity) {
   p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
 
-  addBtn.addEventListener("click", function() {
+  addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
     printBlocks(day.available, "available");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
 
-  removeBtn.addEventListener("click", function() {
+  removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
     printBlocks(day.available, "available");
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
@@ -67,7 +67,7 @@ function displayActivityInput(day) {
   acitivityForm.append(label, newInput, actButton);
 
   // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
-  acitivityForm.addEventListener("submit", function(e) {
+  acitivityForm.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
 }
@@ -105,15 +105,27 @@ function clearForm() {
   });
 }
 
+function addPriorityInput() {
+  const div = document.querySelector("#info-popup");
+  const li = document.createElement("li");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.name = "priorities";
+
+  li.append(input);
+  div.querySelector("ol").append(li);
+}
+
 function displayInfoPopUp() {
   const infoDiv = document.querySelector("#info-popup");
   infoDiv.classList.remove("hidden");
-  infoDiv.querySelector("#priority-list").addEventListener('submit', function(e) {
+  infoDiv.querySelector("#exit-popup").addEventListener("click", exitPopUp);
+  infoDiv.querySelector("#add-more-inputs").addEventListener("click", addPriorityInput);
+  infoDiv.querySelector("#priority-list").addEventListener('submit', function (e) {
     displayPrioritiesList(e);
     exitPopUp();
     clearForm();
   });
-  infoDiv.querySelector("#exit-popup").addEventListener("click", exitPopUp);
 }
 
 function handleFormSubmission(e) {
@@ -124,7 +136,7 @@ function handleFormSubmission(e) {
   displayDay(today);
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
 });

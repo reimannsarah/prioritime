@@ -10,6 +10,31 @@
   display: none;
 }
 
+#info-popup {
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  background-color: blue;
+  padding: 20px;
+}
+
+#exit-popup,
+#add-more-inputs {
+  padding: 8px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+#exit-popup:hover,
+#add-more-inputs:hover {
+  cursor: pointer;
+}
+
+
 body {
   background-color: lightblue;
 } 
@@ -25,4 +50,9 @@ p>div {
   height: 40px;
   margin: 5px;
   background-color: var(--yellow);
+}
+
+#goal-list {
+  padding: 20px;
+  float: right;
 }

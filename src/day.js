@@ -1,6 +1,6 @@
 export default class Day {
-  // available is entered in hours and transposed into 15 minute segments
-  constructor(available) {
+  constructor(name, available) {
+    this.name = name;
     this.available = available * 4;
     this.activities = {};
   }

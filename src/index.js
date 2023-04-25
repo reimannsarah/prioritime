@@ -153,12 +153,16 @@ function displayActivities(day, activity) {
 
 function printBlocks(blockNums, div) {
   let blocksDiv = document.getElementById(div);
-  // blocksDiv.innerHTML = null;
+  let timeTotal = parseFloat(blockNums/4);
+  const timeRemains = document.getElementById("free-time").value;
+  
+  blocksDiv.innerHTML = null;
   for (let i = 0; i < blockNums; i++) {
     const blockDiv = document.createElement("div");
     blockDiv.classList = "blocks";
     blocksDiv.append(blockDiv);
   }
+  blocksDiv.append(`${timeTotal} out of ${timeRemains} hour(s)`);
 }
 
 // function displayActivityInput(day) {

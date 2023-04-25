@@ -9,7 +9,27 @@
 <body>
   <h1>PrioriTime</h1>
   <h4>You will cry with how organized your time has become.</h4>
-
+  <button id="info">?</button>
+  <div id="info-popup" class="hidden">
+    <div id="exit-popup">&#10005;</div>
+    <p>The trick to enjoying your time and making the most of it is to limit your priorities. List everything you think you want to do here. Later on, you can refer to your list while you determine your daily free time and begin allocating it to your priorities. We recommend sticking with your top 5.</p>
+    <form class="priority-list">
+      <ol>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <li><input type="text" name="priorities"></li>
+        <button id="add-more-inputs">+</button>
+      </ol>
+      <button type="submit">Generate Priority List</button>
+    </form>
+  </div>
   <form>
     <label for="free-time">Enter your free time:</label>
     <input type="number" id="free-time">

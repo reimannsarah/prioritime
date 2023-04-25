@@ -80,6 +80,33 @@ function getUserInputActivity(e, day) {
   displayActivities(day, activity);
 }
 
+function displayPrioritiesList(e) {
+  e.preventDefault();
+
+}
+
+function exitPopUp() {
+  document.querySelector("#info-popup").classList = "hidden";
+}
+
+function clearForm() {
+  const inputs = document.querySelectorAll("input[name='priorities']");
+  inputs.forEach(input => {
+    input.value = null;
+  });
+}
+
+function displayInfoPopUp() {
+  const infoDiv = document.querySelector("#info-popup");
+  infoDiv.classList.remove("hidden");
+  infoDiv.querySelector("form.priority-list").addEventListener('submit', function(e) {
+    displayPrioritiesList(e);
+    exitPopUp();
+    clearForm();
+  });
+  infoDiv.querySelector("#exit-popup").addEventListener("click", exitPopUp);
+}
+
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
@@ -90,5 +117,6 @@ function handleFormSubmission(e) {
 
 window.addEventListener("load", function() {
   document.querySelector("form").addEventListener("submit", handleFormSubmission);
+  this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
 });
 

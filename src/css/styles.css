@@ -6,6 +6,10 @@
   --neutral: #465362;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
   background-color: lightblue;
 } 

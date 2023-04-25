@@ -82,7 +82,16 @@ function getUserInputActivity(e, day) {
 
 function displayPrioritiesList(e) {
   e.preventDefault();
+  const goalDiv = document.querySelector('#goal-list');
+  const ol = document.createElement("ol");
+  goalDiv.append(ol);
 
+  const items = document.querySelectorAll("input[name='priorities']");
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = item.value;
+    ol.append(li);
+  });
 }
 
 function exitPopUp() {
@@ -99,7 +108,7 @@ function clearForm() {
 function displayInfoPopUp() {
   const infoDiv = document.querySelector("#info-popup");
   infoDiv.classList.remove("hidden");
-  infoDiv.querySelector("form.priority-list").addEventListener('submit', function(e) {
+  infoDiv.querySelector("#priority-list").addEventListener('submit', function(e) {
     displayPrioritiesList(e);
     exitPopUp();
     clearForm();
@@ -116,7 +125,7 @@ function handleFormSubmission(e) {
 }
 
 window.addEventListener("load", function() {
-  document.querySelector("form").addEventListener("submit", handleFormSubmission);
+  document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
 });
 

@@ -13,7 +13,7 @@
   <div id="info-popup" class="hidden">
     <div id="exit-popup">&#10005;</div>
     <p>The trick to enjoying your time and making the most of it is to limit your priorities. List everything you think you want to do here. Later on, you can refer to your list while you determine your daily free time and begin allocating it to your priorities. We recommend sticking with your top 5.</p>
-    <form class="priority-list">
+    <form id="priority-list">
       <ol>
         <li><input type="text" name="priorities"></li>
         <li><input type="text" name="priorities"></li>
@@ -30,17 +30,16 @@
       <button type="submit">Generate Priority List</button>
     </form>
   </div>
-  <form>
+  <form id="free-time-form">
     <label for="free-time">Enter your free time:</label>
     <input type="number" id="free-time">
     <button type="submit">Prioritize me, Captain!</button>
   </form>
-
-
   <div id="output">
     <div id="available"></div>
     <div id="activity"></div>
     <form id="activForm"></form>
   </div>
+  <div id="goal-list"></div>
 </body>
 </html>

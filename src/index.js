@@ -74,6 +74,7 @@ function printBlocks(blockNums, div) {
 
 function displayActivityInput(day) {
   const activityForm = document.getElementById("activForm");
+  activityForm.innerHTML = null;
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");

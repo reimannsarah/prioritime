@@ -51,7 +51,7 @@ function printBlocks(blockNums, div) {
     blockDiv.classList = "blocks";
     blocksDiv.append(blockDiv);
   }
-  blocksDiv.append(`${timeTotal} out of ${timeRemains} hour(s) remaining`);
+  blocksDiv.append(`${timeTotal} out of ${timeRemains} hour(s)`);
 }
 
 function displayActivityInput(day) {

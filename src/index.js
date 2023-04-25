@@ -4,6 +4,28 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 
+function checkUserFreeTimeValue(value) {
+  if (value <= 24 && value > 0) {
+    return value;
+  } else {
+    const errorMsg = `Not a valid input`;
+    throw new Error(errorMsg);
+  }
+}
+
+function checkUserActivityInput(value) {
+  if (value === null || value === '') {
+    const errorMsg = `Not a valid activity input`;
+    throw new Error(errorMsg);
+  } else {
+    return value;
+  }
+}
+
+function printError(msg) {
+  document.querySelector("#error-msg").innerText = msg.message;
+}
+
 function displayActivities(day, activity) {
   const p = document.createElement("p");
   const addBtn = document.createElement("button");
@@ -51,7 +73,7 @@ function printBlocks(blockNums, div) {
 }
 
 function displayActivityInput(day) {
-  const acitivityForm = document.getElementById("activForm");
+  const activityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
   const actButton = document.createElement("button");
@@ -64,10 +86,10 @@ function displayActivityInput(day) {
 
   label.innerText = "Activity: ";
 
-  acitivityForm.append(label, newInput, actButton);
+  activityForm.append(label, newInput, actButton);
 
-  // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
-  acitivityForm.addEventListener("submit", function (e) {
+
+  activityForm.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
 }
@@ -75,9 +97,15 @@ function displayActivityInput(day) {
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector("input[name='activities']").value;
-  let activity = new Activity(userActivity);
-  day.addActivity(activity);
-  displayActivities(day, activity);
+  document.querySelector("#error-msg").innerText = null;
+  try {
+    let validateUserActivity = checkUserActivityInput(userActivity);
+    let activity = new Activity(validateUserActivity);
+    day.addActivity(activity);
+    displayActivities(day, activity);
+  } catch(error) {
+    printError(error);
+  }
 }
 
 function displayPrioritiesList(e) {
@@ -131,9 +159,14 @@ function displayInfoPopUp() {
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
-  let today = new Day(userFreeTime);
-  // display user's free time as blocks
-  displayDay(today);
+  document.querySelector("#error-msg").innerText = null;
+  try {
+    let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
+    let today = new Day(validateUserFreeTime);
+    displayDay(today);
+  } catch(error) {
+    printError(error);
+  }
 }
 
 window.addEventListener("load", function () {

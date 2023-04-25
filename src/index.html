@@ -22,16 +22,15 @@
       <option value="sunday">Sunday</option>
     </select>
     <label for="free-time">Enter your free time:</label>
-    <input type="number" id="free-time">
+    <input type="number" id="free-time" onfocus="this.value=''">
     <button type="submit">Prioritize me, Captain!</button>
   </form>
 
 
   <div id="output">
-    <div id="available"></div>
     <div id="activity"></div>
     <form id="activForm"></form>
   </div>
-  <div id="day"></div>
+  <div id="week"></div>
 </body>
 </html>

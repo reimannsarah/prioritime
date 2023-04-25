@@ -4,6 +4,15 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 
+function checkUserFreeTimeValue(value) {
+  if (value === Number(value) && value <= 24) {
+    return value;
+  } else {
+    const errorMsg = `Not a valid input`;
+    throw new Error(errorMsg);
+  }
+}
+
 function displayActivities(day, activity) {
   const p = document.createElement("p");
   const addBtn = document.createElement("button");
@@ -66,7 +75,6 @@ function displayActivityInput(day) {
 
   acitivityForm.append(label, newInput, actButton);
 
-  // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
   acitivityForm.addEventListener("submit", function(e) {
     getUserInputActivity(e, day);
   });
@@ -84,7 +92,6 @@ function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
   let today = new Day(userFreeTime);
-  // display user's free time as blocks
   displayDay(today);
 }
 

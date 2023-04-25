@@ -1,3 +1,11 @@
+:root {
+  --red: #D62246;
+  --yellow: #F9DC5C;
+  --light: #F0F4F9;
+  --dark: #303A2B;
+  --neutral: #465362;
+}
+
 body {
   background-color: lightblue;
 } 
@@ -9,9 +17,8 @@ p>div {
 }
 
 .blocks {
-  border: 1px solid black;
   width: 40px;
   height: 40px;
   margin: 5px;
-  background-color: blue;
+  background-color: var(--yellow);
 }

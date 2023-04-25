@@ -45,8 +45,7 @@ body {
   background-color: lightblue;
 } 
 
-#available, 
-#week {
+.block-group {
   display: flex;
   flex-wrap: wrap;
 }

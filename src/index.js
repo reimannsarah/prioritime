@@ -24,7 +24,6 @@ let newWeek = new Week();
 
 function handleFormSubmission(e) {
   e.preventDefault();
-  clearOutputField();
   const userFreeTime = document.getElementById("free-time").value;
   //add dropdown menu and get value from menu to pass in as name to Day object
   const dayOf = document.getElementById("dayOf").value;
@@ -46,6 +45,7 @@ function displayWeek(day) {
   let p = document.createElement("p");
   let blockdiv = document.createElement("div");
   blockdiv.id = `${day.name}-blocks`;
+  blockdiv.classList = "block-group";
   p.innerHTML = day.name.toUpperCase();
 
   weekCard.append(p, blockdiv);
@@ -66,9 +66,11 @@ function displayActivityInput(day) {
 
   newInput.type = "text";
   newInput.name = "activities";
+  newInput.id = `${day.name}-input`;
 
   label.innerText = "Activity: ";
 
+  form.id = `${day.name}-form`;
   form.append(label, newInput, actButton);
   weekCard.append(form);
   form.addEventListener("submit", function (e) {
@@ -78,7 +80,7 @@ function displayActivityInput(day) {
 
 function getUserInputActivity(e, day) {
   e.preventDefault();
-  let userActivity = document.querySelector("input[name='activities']").value;
+  let userActivity = document.querySelector(`#${day.name}-input`).value;
   document.querySelector("input[name='activities']").value = null;
   document.querySelector("#error-msg").innerText = null;
   try {
@@ -97,6 +99,7 @@ function displayActivities(day, activity) {
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
   blocks.setAttribute("id", `${activity.name}-blocks`);
+  blocks.classList = "block-group";
 
   addBtn.innerText = "+";
   addBtn.setAttribute("id", "add-btn");
@@ -109,15 +112,16 @@ function displayActivities(day, activity) {
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
-    printBlocks(day.available, "week");
+    printBlocks(day.available, `${day.name}-blocks`);
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
-    printBlocks(day.available, `${day.name}-blocks`);
+    printBlocks(day.available, `${day.name}-blocks`)
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
-  document.getElementById("activity").append(p);
+  const weekCard = document.getElementById(`${day.name}`)
+  weekCard.querySelector("form").before(p);
 }
 
 function printBlocks(blockNums, div) {
@@ -204,12 +208,6 @@ function displayInfoPopUp() {
     exitPopUp();
   });
 }
-
-function clearOutputField() {
-  document.querySelector("#week").innerHTML = null;
-  document.querySelector("#activity").innerHTML = null;
-}
-
 
 
 window.addEventListener("load", function () {

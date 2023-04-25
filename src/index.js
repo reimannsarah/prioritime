@@ -5,7 +5,7 @@ import Day from './day.js';
 import Activity from './activity.js';
 
 function checkUserFreeTimeValue(value) {
-  if (value === Number(value) && value <= 24) {
+  if (value <= 24) {
     return value;
   } else {
     const errorMsg = `Not a valid input`;
@@ -95,6 +95,7 @@ function getUserInputActivity(e, day) {
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
+  document.querySelector("#error-msg").innerText = null;
   try {
     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
     let today = new Day(validateUserFreeTime);

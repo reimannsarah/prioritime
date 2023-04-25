@@ -4,52 +4,41 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 
-// Business Logic
+function displayActivities(day, activity) {
+  const p = document.createElement("p");
+  const addBtn = document.createElement("button");
+  const removeBtn = document.createElement("button");
+  const blocks = document.createElement("div");
+  blocks.setAttribute("id", `${activity.name}-blocks`);
 
+  addBtn.innerText = "+";
+  addBtn.setAttribute("id", "add-btn");
+  
+  removeBtn.innerText = "-";
+  removeBtn.setAttribute("id", "remove-btn");
 
+  p.setAttribute("id", activity.name);
+  p.innerText = activity.name;
+  p.append(addBtn, removeBtn, blocks);
 
-
-// UI Logic
-
-function displayDay(day) {
-  document.getElementById("available").innerText = day.available;
-  let keys = Object.keys(day.activities);
-
-  keys.forEach(key => {
-    const p = document.createElement("p");
-    const addBtn = document.createElement("button");
-    const removeBtn = document.createElement("button");
-    const blocks = document.createElement("div");
-    blocks.setAttribute("id", `${day.activities[key].name}-blocks`);
-
-    addBtn.innerText = "Add Time";
-    addBtn.setAttribute("id", "add-btn");
-    
-    removeBtn.innerText = "Delete Time";
-    removeBtn.setAttribute("id", "remove-btn");
-
-    p.setAttribute("id", day.activities[key].name)
-    p.innerText = day.activities[key].name;
-    p.append(addBtn, removeBtn, blocks);
-
-    addBtn.addEventListener("click", function() {
-      day.addActivityBlocks(day.activities[key].name);
-      printBlocks(day.available, "available");
-      printBlocks(day.activities[key].blocks, `${day.activities[key].name}-blocks`);
-    });
-
-    removeBtn.addEventListener("click", function() {
-      day.subtractActivityBlocks(day.activities[key].name);
-      printBlocks(day.available, "available");
-      printBlocks(day.activities[key].blocks, `${day.activities[key].name}-blocks`);
-    });
-
-    document.getElementById("activity").append(p);
+  addBtn.addEventListener("click", function() {
+    day.addActivityBlocks(activity.name);
+    printBlocks(day.available, "available");
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
-  printBlocks(day.available, "available");
+
+  removeBtn.addEventListener("click", function() {
+    day.subtractActivityBlocks(activity.name);
+    printBlocks(day.available, "available");
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+  });
+  document.getElementById("activity").append(p);
 }
 
-
+function displayDay(day) {
+  displayActivityInput(day);
+  printBlocks(day.available, "available");
+}
 
 function printBlocks(blockNums, div) {
   let blocksDiv = document.getElementById(div);
@@ -61,31 +50,45 @@ function printBlocks(blockNums, div) {
   }
 }
 
-function displayActivityInput() {
-  const form = document.querySelector("#activity1");
+function displayActivityInput(day) {
+  const acitivityForm = document.getElementById("activForm");
   const newInput = document.createElement("input");
   const label = document.createElement("label");
+  const actButton = document.createElement("button");
+
+  actButton.innerText = "Submit";
+  actButton.id = "add-activity";
 
   newInput.type = "text";
-  newInput.name = "activities"
+  newInput.name = "activities";
+
   label.innerText = "Activity: ";
-  form.after(label, newInput);
+
+  acitivityForm.append(label, newInput, actButton);
+
+  // add submit event listener to the acitivity input, but pass day object by calling the function inside the event handler
+  acitivityForm.addEventListener("submit", function(e) {
+    getUserInputActivity(e, day);
+  });
+}
+// 
+function getUserInputActivity(e, day) {
+  e.preventDefault();
+  let userActivity = document.querySelector("input[name='activities']").value;
+  let activity = new Activity(userActivity);
+  day.addActivity(activity);
+  displayActivities(day, activity);
 }
 
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
-  const userActivity = document.querySelectorAll("input[name='activities']");
-
   let today = new Day(userFreeTime);
-
-  userActivity.forEach(element => {
-    let activity = new Activity(element.value);
-    today.addActivity(activity);
-  });
-
+  // display user's free time as blocks
   displayDay(today);
 }
 
-document.querySelector("form").addEventListener("submit", handleFormSubmission);
-document.getElementById("add-activity").addEventListener("click", displayActivityInput);
+window.addEventListener("load", function() {
+  document.querySelector("form").addEventListener("submit", handleFormSubmission);
+});
+

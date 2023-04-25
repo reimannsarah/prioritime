@@ -3,15 +3,36 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
-// import Week from './week.js';
+import Week from './week';
+
+//this is a bad idea but here is a global newWeek
+let newWeek = new Week();
 
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
+  //add dropdown menu and get value from menu to pass in as name to Day object
   const dayOf = document.getElementById("dayOf").value;
-  let today = new Day(dayOf, userFreeTime);
-  // display user's free time as blocks
-  displayDay(today);
+  //change variable to 'newDay' instead of 'today' and pass in dayOf variable for name
+  let newDay = new Day(dayOf, userFreeTime);
+  //instantiate new Week and add Day to it
+  newWeek.addDay(newDay);
+  //change argument from 'today' to 'newDay'
+  displayDay(newDay);
+  displayWeek(newWeek);
+  console.log(newWeek);
+}
+
+function displayWeek(week) {
+  const weekArray = Object.keys(week);
+  let div = document.getElementById("day");
+  weekArray.forEach(day => {
+    if (week[day].name) {
+    let p = document.createElement("p");
+    p.innerHTML = week[day].name;
+    div.append(p);
+    }
+  })
 }
 
 

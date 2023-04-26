@@ -4,26 +4,64 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 import Week from './week';
-import Storage from './storage.js';
+import User from './user';
+// import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
-let newWeek = new Week();
-Storage.newUser(newWeek, "johnny");
-console.log(Storage.getUsers());
+let user;
+// Storage.getUsers();
+// Storage.getUsers()
+//   .then(function (response) {
+//     if (response.baskets) {
+//       console.log(response.baskets);
+//     } else {
+//       console.log('u fked up');
+//     }
+//   });
+
+// let tuesday = new Day("Tuesday", 6);
+// Storage.updateData(tuesday, "johnny")
+//   .then(function (response) {
+//     if (response.baskets) {
+//       console.log(response.baskets);
+//     } else {
+//       console.log('stoopid');
+//     }
+//   });
+
+
+
+
+
 
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
   const dayOf = document.getElementById("dayOf").value;
+  const userName = document.getElementById("userName").value.toLowerCase();
+  const user_name = document.getElementById("userName").value;
+  displayName(user_name);
   try {
     // let validateDay = checkForDayInstance(dayOf);
     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
     let newDay = new Day(dayOf, validateUserFreeTime);
+    let newWeek = new Week("week_1");
     newWeek.addDay(newDay);
+    user = new User (userName);
+    user.addWeek(newWeek);
+    console.log(user);
     displayWeek(newDay);
-  } catch(error) {
+  } catch (error) {
     printError(error);
   }
+}
+
+function displayName(userName) {
+  document.getElementById("userName").setAttribute("class", "hidden");
+  const helloUser = document.createElement("h3");
+  helloUser.innerText = `Hello, ${userName}!`;
+  document.querySelector("h4").after(helloUser);
+
 }
 
 // function checkForDayInstance(value) {
@@ -117,7 +155,7 @@ function displayActivities(day, activity) {
   removeBtn.setAttribute("id", "remove-btn");
 
   p.setAttribute("id", activity.name);
-  p.innerText = activity.name; 
+  p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
@@ -126,10 +164,10 @@ function displayActivities(day, activity) {
   });
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
-    printBlocks(day.available, `${day.name}-blocks`)
+    printBlocks(day.available, `${day.name}-blocks`);
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
-  const weekCard = document.getElementById(`${day.name}`)
+  const weekCard = document.getElementById(`${day.name}`);
   weekCard.querySelector("form").before(p);
 }
 

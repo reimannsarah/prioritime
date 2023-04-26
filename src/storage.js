@@ -1,4 +1,23 @@
 export default class Storage {
+  static getUsers() {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = "";
+
+    let requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
   static newUser(obj, userName) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -75,6 +94,26 @@ export default class Storage {
         return error;
       });
   }
+
+  static deleteUser(userName) {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = "";
+
+    let requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
 }
 
 

@@ -4,10 +4,12 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 import Week from './week';
-// import Storage from './storage.js';
+import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
+Storage.newUser(newWeek, "johnny");
+console.log(Storage.getUsers());
 
 function handleFormSubmission(e) {
   e.preventDefault();

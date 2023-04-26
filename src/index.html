@@ -7,50 +7,54 @@
   <title>Prioritime</title>
 </head>
 <body>
-  <h1>PrioriTime</h1>
-  <h4>You will cry with how organized your time has become.</h4>
-  <div id="error-msg"></div>
+  <header>
+    <h1>PrioriTime</h1>
+    <h4>You will cry with how organized your time has become.</h4>
+  </header>
 
-  <button id="info">?</button>
-  <div id="info-popup" class="hidden">
-    <div id="exit-popup">&#10005;</div>
-    <p>The trick to enjoying your time and making the most of it is to <em>limit your priorities</em>. 
-    <p>List everything you think you want to do here, like become famous, or be a dog walker, or play with your kids more.</p>
-    <p>As you allocate your free time refer to this initial list.</p>
-    <form id="priority-list">
-      <ol>
-        <li><input type="text" name="priorities"></li>
-        <li><input type="text" name="priorities"></li>
-        <li><input type="text" name="priorities"></li>
-        <li><input type="text" name="priorities"></li>
-        <li><input type="text" name="priorities"></li>
-      </ol>
-      <div id="add-more-inputs">+</div>
-      <button type="submit">Generate Priority List</button>
+  <div class="nav">
+    <form id="free-time-form">
+      <select id="dayOf">
+        <option selected disabled>Please select a day</option>
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option>
+        <option value="sunday">Sunday</option>
+      </select>
+      <label for="free-time">Enter your free time:</label>
+      <input type="number" id="free-time" onfocus="this.value=''">
+      <button type="submit">Add day</button>
     </form>
-  </div>
-
-  <form id="free-time-form">
-    <select id="dayOf">
-      <option selected disabled>Please select a day</option>
-      <option value="monday">Monday</option>
-      <option value="tuesday">Tuesday</option>
-      <option value="wednesday">Wednesday</option>
-      <option value="thursday">Thursday</option>
-      <option value="friday">Friday</option>
-      <option value="saturday">Saturday</option>
-      <option value="sunday">Sunday</option>
-    </select>
-    <label for="free-time">Enter your free time:</label>
-    <input type="number" id="free-time" onfocus="this.value=''">
-    <button type="submit">Prioritize me, Captain!</button>
-  </form>
+    <button id="info">?</button>
+  </div> 
   
-  <div id="output">
-    <div id="week"></div>
-    <div id="activity"></div>
-  </div>
+  <div class="container-main">
+    <div id="info-popup" class="hidden">
+      <div id="exit-popup">&#10005;</div>
+      <p>The trick to enjoying your time and making the most of it is to <em>limit your priorities</em>. 
+      <p>List everything you think you want to do here, like become famous, or be a dog walker, or play with your kids more.</p>
+      <p>As you allocate your free time refer to this initial list.</p>
+      <form id="priority-list">
+        <ol>
+          <li><input type="text" name="priorities"></li>
+          <li><input type="text" name="priorities"></li>
+          <li><input type="text" name="priorities"></li>
+          <li><input type="text" name="priorities"></li>
+          <li><input type="text" name="priorities"></li>
+        </ol>
+        <div id="add-more-inputs">+</div>
+        <button type="submit">Generate Priority List</button>
+      </form>
+    </div>
 
-  <div id="goal-list"></div>
+    <div id="output">
+      <div id="week"></div>
+    </div>
+    <div id="goal-list"></div>
+    <div id="error-msg"></div>
+  </div>
 </body>
 </html>

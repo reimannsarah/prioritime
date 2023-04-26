@@ -26,7 +26,7 @@ function handleFormSubmission(e) {
 
 function checkForDayInstance(value) {
   const daysToCheck = document.querySelector("#week").childNodes;
-  if (Array.from(daysToCheck).length === 0) {
+  if (!daysToCheck) {
     return value;
   } else {
     daysToCheck.forEach(card => {

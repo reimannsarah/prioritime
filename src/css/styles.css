@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;0,900;1,300&display=swap');
 
+#profileBtn {
+  float: right;
+}
+
+#userName {
+  width: 200px;
+  padding: 3px;
+}
+
 :root {
   --green: #4d7c0f;
   --yellow: #fcd34d;
@@ -14,6 +23,10 @@
   z-index: -1;
 }
 
+#hidden {
+  display: none;
+}
+
 body {
   background-color: var(--light);
   font-family: var(--font);
@@ -26,6 +39,7 @@ header {
   background-color: var(--green);
   width: 100vw;
   color: var(--light);
+  /* height: 200px; */
 }
 
 header h1 {
@@ -38,8 +52,17 @@ header h4 {
   color: var(--yellow);
 }
 
+#userNameDisplay {
+  float: left;
+  width: 40%;
+}
+
+#welcome {
+  margin-top: 12rem;
+}
+
 .nav {
-  margin-top: 10vh;
+  margin-top: 12vh;
   padding: 2.5em;
 }
 
@@ -47,6 +70,7 @@ header h4 {
   width: 85vw;
   display: flex;
   justify-content: space-evenly;
+  margin: 3px;
 }
 
 .nav form input {

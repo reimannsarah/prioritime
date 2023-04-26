@@ -6,6 +6,24 @@ import Activity from './activity.js';
 import Week from './week';
 // import Storage from './storage.js';
 
+
+// function weekReset() {
+
+// }
+
+
+
+
+
+
+// function prioritiesReset() {
+
+// }
+
+
+//Utility (reset button(s))
+
+
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
 
@@ -19,7 +37,7 @@ function handleFormSubmission(e) {
     let newDay = new Day(validateDay, validateUserFreeTime);
     newWeek.addDay(newDay);
     displayWeek(newDay);
-  } catch(error) {
+  } catch (error) {
     printError(error);
   }
 }
@@ -47,6 +65,7 @@ function displayWeek(day) {
   let p = document.createElement("p");
   let blockdiv = document.createElement("div");
   blockdiv.id = `${day.name}-blocks`;
+  blockdiv.dataset.hours = day.available / 4;
   blockdiv.classList = "block-group";
   p.innerHTML = day.name.toUpperCase();
 
@@ -54,6 +73,7 @@ function displayWeek(day) {
   weekDiv.append(weekCard);
   printBlocks(day.available, `${day.name}-blocks`);
   displayActivityInput(day);
+
 }
 
 function displayActivityInput(day) {
@@ -76,9 +96,13 @@ function displayActivityInput(day) {
   form.id = `${day.name}-form`;
   form.append(label, newInput, actButton);
   weekCard.append(form);
+
   form.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
+  // NEW vv
+  setDayReset(`${day.name}`);
+  // NEW ^^
 }
 
 function getUserInputActivity(e, day) {
@@ -102,7 +126,12 @@ function displayActivities(day, activity) {
   const addBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
-  blocks.setAttribute("id", `${activity.name}-blocks`);
+
+  // NEW vv
+  blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
+  blocks.dataset.hours = day.available / 4;
+  // NEW ^^
+
   blocks.classList = "block-group";
 
   addBtn.innerText = "+";
@@ -112,26 +141,26 @@ function displayActivities(day, activity) {
   removeBtn.setAttribute("id", "remove-btn");
 
   p.setAttribute("id", activity.name);
-  p.innerText = activity.name; 
+  p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
     printBlocks(day.available, `${day.name}-blocks`);
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
     printBlocks(day.available, `${day.name}-blocks`)
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
-  const weekCard = document.getElementById(`${day.name}`)
+  const weekCard = document.getElementById(`${day.name}`);
   weekCard.querySelector("form").before(p);
 }
 
 function printBlocks(blockNums, div) {
   let blocksDiv = document.getElementById(div);
   let timeTotal = parseFloat(blockNums / 4);
-  const timeRemains = document.getElementById("free-time").value;
+  const dayHours = document.getElementById(div);
 
   blocksDiv.innerHTML = null;
   for (let i = 0; i < blockNums; i++) {
@@ -139,7 +168,7 @@ function printBlocks(blockNums, div) {
     blockDiv.classList = "blocks";
     blocksDiv.append(blockDiv);
   }
-  blocksDiv.append(`${timeTotal} out of ${timeRemains} hour(s)`);
+  blocksDiv.append(`${timeTotal} out of ${dayHours.dataset.hours} hour(s)`);
 }
 
 // error handling
@@ -211,6 +240,24 @@ function displayInfoPopUp() {
     exitPopUp();
   });
 }
+
+// NEW vv
+
+function dayReset(dayDiv) {
+  document.getElementById(`${dayDiv}`).innerHTML = null;
+}
+
+function setDayReset(dayDiv) {
+  const dayResetButton = document.createElement("button");
+  dayResetButton.innerText = ("Reset Day");
+  dayResetButton.id = ("dayResetButton");
+  document.getElementById(dayDiv).append(dayResetButton);
+  dayResetButton.addEventListener("click", dayReset(dayDiv));
+
+}
+
+// NEW ^^
+
 
 
 window.addEventListener("load", function () {

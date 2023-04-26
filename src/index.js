@@ -6,6 +6,26 @@ import Activity from './activity.js';
 import Week from './week';
 // import Storage from './storage.js';
 
+
+// function weekReset() {
+
+// }
+
+// function dayReset() {
+//   document.getElementById("week").innerHTML = null;
+// }
+
+
+
+
+// function prioritiesReset() {
+
+// }
+
+
+//Utility (reset button(s))
+
+
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
 
@@ -19,10 +39,15 @@ function handleFormSubmission(e) {
     let newDay = new Day(dayOf, validateUserFreeTime);
     newWeek.addDay(newDay);
     displayWeek(newDay);
-  } catch(error) {
+  } catch (error) {
     printError(error);
   }
 }
+
+
+
+
+
 
 // function checkForDayInstance(value) {
 //   const daysToCheck = document.querySelector("#week").childNodes;
@@ -58,6 +83,7 @@ function displayWeek(day) {
   weekDiv.append(weekCard);
   printBlocks(day.available, `${day.name}-blocks`);
   displayActivityInput(day);
+  
 }
 
 function displayActivityInput(day) {
@@ -79,9 +105,11 @@ function displayActivityInput(day) {
   form.id = `${day.name}-form`;
   form.append(label, newInput, actButton);
   weekCard.append(form);
+
   form.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
+    // setDayReset(`${day.name}`);
 }
 
 function getUserInputActivity(e, day) {
@@ -105,7 +133,9 @@ function displayActivities(day, activity) {
   const addBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
-  blocks.setAttribute("id", `${activity.name}-blocks`);
+  //
+  blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
+  //
   blocks.classList = "block-group";
 
   addBtn.innerText = "+";
@@ -115,17 +145,17 @@ function displayActivities(day, activity) {
   removeBtn.setAttribute("id", "remove-btn");
 
   p.setAttribute("id", activity.name);
-  p.innerText = activity.name; 
+  p.innerText = activity.name;
   p.append(addBtn, removeBtn, blocks);
   addBtn.addEventListener("click", function () {
     day.addActivityBlocks(activity.name);
     printBlocks(day.available, `${day.name}-blocks`);
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
     printBlocks(day.available, `${day.name}-blocks`)
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
   const weekCard = document.getElementById(`${day.name}`)
   weekCard.querySelector("form").before(p);
@@ -215,6 +245,20 @@ function displayInfoPopUp() {
     exitPopUp();
   });
 }
+
+// NEW vv
+
+// function setDayReset(dayDiv) {
+//   const dayResetButton = document.createElement("button");
+//   dayResetButton.innerText = ("Reset Day");
+//   dayResetButton.id = ("dayResetButton");
+//   document.getElementById(dayDiv).append(dayResetButton);
+//   // dayResetButton.addEventListener("click", dayReset);
+
+// }
+
+// NEW ^^
+
 
 
 window.addEventListener("load", function () {

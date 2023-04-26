@@ -54,6 +54,7 @@ function displayWeek(day) {
   weekCard.append(p, blockdiv);
   weekDiv.append(weekCard);
   printBlocks(day.available, `${day.name}-blocks`);
+  setDayReset(`${day.name}`);
   displayActivityInput(day);
 }
 
@@ -82,7 +83,7 @@ function displayActivityInput(day) {
     getUserInputActivity(e, day);
   });
   // NEW vv
-  // setDayReset(`${day.name}`);
+
   // NEW ^^
 }
 
@@ -224,18 +225,19 @@ function displayInfoPopUp() {
 
 // NEW vv
 
-// function dayReset(dayDiv) {
-//   document.getElementById(`${dayDiv}`).innerHTML = null;
-// }
+function dayReset(dayDiv) {
+  document.getElementById(`${dayDiv}`).innerHTML = null;
+}
 
-// function setDayReset(dayDiv) {
-//   const dayResetButton = document.createElement("button");
-//   dayResetButton.innerText = ("Reset Day");
-//   dayResetButton.id = ("dayResetButton");
-//   document.getElementById(dayDiv).append(dayResetButton);
-//   dayResetButton.addEventListener("click", dayReset(dayDiv));
-
-// }
+function setDayReset(dayDiv) {
+  const dayResetButton = document.createElement("button");
+  dayResetButton.innerText = "Reset Day";
+  dayResetButton.classList = "dayResetButton";
+  document.getElementById(dayDiv).append(dayResetButton);
+  dayResetButton.addEventListener("click", function() {
+    dayReset(dayDiv);
+  });
+}
 
 // NEW ^^
 

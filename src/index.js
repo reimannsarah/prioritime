@@ -11,9 +11,7 @@ import Week from './week';
 
 // }
 
-// function dayReset() {
-//   document.getElementById("week").innerHTML = null;
-// }
+
 
 
 
@@ -84,7 +82,7 @@ function displayWeek(day) {
   weekDiv.append(weekCard);
   printBlocks(day.available, `${day.name}-blocks`);
   displayActivityInput(day);
-  
+
 }
 
 function displayActivityInput(day) {
@@ -110,7 +108,9 @@ function displayActivityInput(day) {
   form.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
-    // setDayReset(`${day.name}`);
+  // NEW vv
+  setDayReset(`${day.name}`);
+  // NEW ^^
 }
 
 function getUserInputActivity(e, day) {
@@ -134,10 +134,12 @@ function displayActivities(day, activity) {
   const addBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
-  //
+
+  // NEW vv
   blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
-  blocks.dataset.hours = day.available /4;
-  //
+  blocks.dataset.hours = day.available / 4;
+  // NEW ^^
+
   blocks.classList = "block-group";
 
   addBtn.innerText = "+";
@@ -159,7 +161,7 @@ function displayActivities(day, activity) {
     printBlocks(day.available, `${day.name}-blocks`)
     printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
-  const weekCard = document.getElementById(`${day.name}`)
+  const weekCard = document.getElementById(`${day.name}`);
   weekCard.querySelector("form").before(p);
 }
 
@@ -250,14 +252,18 @@ function displayInfoPopUp() {
 
 // NEW vv
 
-// function setDayReset(dayDiv) {
-//   const dayResetButton = document.createElement("button");
-//   dayResetButton.innerText = ("Reset Day");
-//   dayResetButton.id = ("dayResetButton");
-//   document.getElementById(dayDiv).append(dayResetButton);
-//   // dayResetButton.addEventListener("click", dayReset);
+function dayReset(dayDiv) {
+  document.getElementById(`${dayDiv}`).innerHTML = null;
+}
 
-// }
+function setDayReset(dayDiv) {
+  const dayResetButton = document.createElement("button");
+  dayResetButton.innerText = ("Reset Day");
+  dayResetButton.id = ("dayResetButton");
+  document.getElementById(dayDiv).append(dayResetButton);
+  dayResetButton.addEventListener("click", dayReset(dayDiv));
+
+}
 
 // NEW ^^
 

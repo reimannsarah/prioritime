@@ -1,10 +1,26 @@
 export default class Storage {
-  static newUser(obj, userName) {
+  static getUsers() {
+    return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8`)
+      .then(function (response) {
+        if (!response.ok) {
+          const errorMessage = `Error ${response.status}
+          There was an error grabbing the users`;
+          throw new Error(errorMessage);
+        } else {
+          return response.json();
+        }
+      })
+      .catch(function (error) {
+        return error;
+      });
+  }
+
+  static newUser(user, userName) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
-      "day": obj
+      user
     });
 
     let requestOptions = {
@@ -13,33 +29,41 @@ export default class Storage {
       body: raw,
       redirect: 'follow'
     };
-
-    fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+    return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+      .then(function (response) {
+        if (!response.ok) {
+          const errorMessage = `Error: ${response.status}
+          There was an error saving the data for the user`;
+          throw new Error(errorMessage);
+        } else {
+          return response;
+        }
+      })
+      .catch(function (error) {
+        return error;
+      });
   }
+//We might need this later. 
+  // static updateData(obj, userName) {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
 
-  static updateData(obj, userName) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+  //   var raw = JSON.stringify({
+  //     "day[bTuesday]": obj
+  //   });
 
-    var raw = JSON.stringify({
-      obj
-    });
+  //   var requestOptions = {
+  //     method: 'PUT',
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: 'follow'
+  //   };
 
-    var requestOptions = {
-      method: 'PUT',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-  }
+  //   fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+  //     .then(response => response.text())
+  //     .then(result => console.log(result))
+  //     .catch(error => console.log('error', error));
+  // }
 
 
   // static getData(userName) {
@@ -75,6 +99,26 @@ export default class Storage {
         return error;
       });
   }
+
+  static deleteUser(userName) {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = "";
+
+    let requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
 }
 
 

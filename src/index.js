@@ -4,24 +4,67 @@ import './css/styles.css';
 import Day from './day.js';
 import Activity from './activity.js';
 import Week from './week';
-// import Storage from './storage.js';
+import User from './user';
+import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
-let newWeek = new Week();
+let user;
+
+
+
+function addUser(user, userName) {
+  Storage.newUser(user, userName)
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        printError(response);
+      }
+    });
+}
+
+// function getUsers() {
+//   Storage.getUsers()
+//     .then(function (response) {
+//       if (response.baskets) {
+//         return response.baskets;
+//       } else {
+//         printError(response);
+//       }
+//     });
+// }
+
+
 
 function handleFormSubmission(e) {
   e.preventDefault();
   const userFreeTime = document.getElementById("free-time").value;
   const dayOf = document.getElementById("dayOf").value;
+  const userName = document.getElementById("userName").value.toLowerCase();
+  const user_name = document.getElementById("userName").value;
+  displayName(user_name);
   try {
     let validateDay = checkForDayInstance(dayOf);
     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
     let newDay = new Day(validateDay, validateUserFreeTime);
+    let newWeek = new Week("week_1");
     newWeek.addDay(newDay);
+    user = new User(userName);
+    user.addWeek(newWeek);
+    console.log(user);
     displayWeek(newDay);
-  } catch (error) {
+    addUser(user, userName);
+  } catch  (error) {
     printError(error);
   }
+}
+
+function displayName(userName) {
+  document.getElementById("userName").setAttribute("class", "hidden");
+  const helloUser = document.createElement("h3");
+  helloUser.innerText = `Hello, ${userName}!`;
+  document.querySelector("h4").after(helloUser);
+
 }
 
 function checkForDayInstance(value) {
@@ -132,8 +175,8 @@ function displayActivities(day, activity) {
   });
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
-    printBlocks(day.available, `${day.name}-blocks`)
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
+    printBlocks(day.available, `${day.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
   });
   const weekCard = document.getElementById(`${day.name}`);
   weekCard.querySelector("form").before(p);
@@ -247,4 +290,3 @@ window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
 });
-

@@ -56,6 +56,9 @@ function displayWeek(day) {
   printBlocks(day.available, `${day.name}-blocks`);
   setDayReset(`${day.name}`);
   displayActivityInput(day);
+  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")){
+    setWeekReset();
+  }
 }
 
 function displayActivityInput(day) {
@@ -223,7 +226,7 @@ function displayInfoPopUp() {
   });
 }
 
-// NEW vv
+// Reset Buttons
 
 function dayReset(dayDiv) {
   document.getElementById(`${dayDiv}`).remove();
@@ -239,8 +242,21 @@ function setDayReset(dayDiv) {
   });
 }
 
-// NEW ^^
 
+function weekReset() {
+  document.getElementById("week").innerHTML = null;
+}
+
+function setWeekReset() {
+
+  const weekResetButton = document.createElement("button");
+  weekResetButton.innerText = "Reset Week";
+  weekResetButton.classList = "weekResetButton";
+  document.getElementById("week").after(weekResetButton);
+  weekResetButton.addEventListener("click", function() {
+    weekReset();
+  });
+}
 
 
 window.addEventListener("load", function () {

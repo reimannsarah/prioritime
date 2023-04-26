@@ -5,32 +5,34 @@ import Day from './day.js';
 import Activity from './activity.js';
 import Week from './week';
 import User from './user';
-// import Storage from './storage.js';
+import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
 let user;
-// Storage.getUsers();
-// Storage.getUsers()
-//   .then(function (response) {
-//     if (response.baskets) {
-//       console.log(response.baskets);
-//     } else {
-//       console.log('u fked up');
-//     }
-//   });
-
-// let tuesday = new Day("Tuesday", 6);
-// Storage.updateData(tuesday, "johnny")
-//   .then(function (response) {
-//     if (response.baskets) {
-//       console.log(response.baskets);
-//     } else {
-//       console.log('stoopid');
-//     }
-//   });
 
 
 
+function addUser(user, userName) {
+  Storage.newUser(user, userName)
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        printError(response);
+      }
+    });
+}
+
+// function getUsers() {
+//   Storage.getUsers()
+//     .then(function (response) {
+//       if (response.baskets) {
+//         return response.baskets;
+//       } else {
+//         printError(response);
+//       }
+//     });
+// }
 
 
 
@@ -47,10 +49,11 @@ function handleFormSubmission(e) {
     let newDay = new Day(dayOf, validateUserFreeTime);
     let newWeek = new Week("week_1");
     newWeek.addDay(newDay);
-    user = new User (userName);
+    user = new User(userName);
     user.addWeek(newWeek);
     console.log(user);
     displayWeek(newDay);
+    addUser(user, userName);
   } catch (error) {
     printError(error);
   }
@@ -261,4 +264,3 @@ window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
 });
-

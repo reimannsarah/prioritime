@@ -14,9 +14,9 @@ function handleFormSubmission(e) {
   const userFreeTime = document.getElementById("free-time").value;
   const dayOf = document.getElementById("dayOf").value;
   try {
-    // let validateDay = checkForDayInstance(dayOf);
+    let validateDay = checkForDayInstance(dayOf);
     let validateUserFreeTime = checkUserFreeTimeValue(userFreeTime);
-    let newDay = new Day(dayOf, validateUserFreeTime);
+    let newDay = new Day(validateDay, validateUserFreeTime);
     newWeek.addDay(newDay);
     displayWeek(newDay);
   } catch(error) {
@@ -24,23 +24,19 @@ function handleFormSubmission(e) {
   }
 }
 
-// function checkForDayInstance(value) {
-//   const daysToCheck = document.querySelector("#week").childNodes;
-//   if (daysToCheck.length === 0) {
-//     return value;
-//   } else {
-//     console.log("its in here!")
-//     daysToCheck.forEach(card => {
-//       if (card.id === value) {
-//         const errorMsg = `You already have that day!`;
-//         throw new Error(errorMsg);
-//       } else {
-//         console.log("and in here!")
-//         return value;
-//       }
-//     });
-//   }
-// }
+function checkForDayInstance(value) {
+  const daysToCheck = document.querySelector("#week").childNodes;
+  if (Array.from(daysToCheck).length === 0) {
+    return value;
+  } else {
+    daysToCheck.forEach(card => {
+      if (card.id === value) {
+        const errorMsg = `You already have that day!`;
+        throw new Error(errorMsg);
+      }
+    }); 
+  } return value;
+}
 
 function displayWeek(day) {
   let weekDiv = document.getElementById("week");

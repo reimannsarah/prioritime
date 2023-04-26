@@ -6,24 +6,6 @@ import Activity from './activity.js';
 import Week from './week';
 // import Storage from './storage.js';
 
-
-// function weekReset() {
-
-// }
-
-
-
-
-
-
-// function prioritiesReset() {
-
-// }
-
-
-//Utility (reset button(s))
-
-
 //this is a bad idea but here is a global newWeek
 let newWeek = new Week();
 
@@ -65,15 +47,14 @@ function displayWeek(day) {
   let p = document.createElement("p");
   let blockdiv = document.createElement("div");
   blockdiv.id = `${day.name}-blocks`;
-  blockdiv.dataset.hours = day.available / 4;
+  // blockdiv.dataset.hours = day.available / 4;
   blockdiv.classList = "block-group";
-  p.innerHTML = day.name.toUpperCase();
+  p.innerText = day.name.toUpperCase();
 
   weekCard.append(p, blockdiv);
   weekDiv.append(weekCard);
   printBlocks(day.available, `${day.name}-blocks`);
   displayActivityInput(day);
-
 }
 
 function displayActivityInput(day) {

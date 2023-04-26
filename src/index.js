@@ -76,6 +76,7 @@ function displayWeek(day) {
   let p = document.createElement("p");
   let blockdiv = document.createElement("div");
   blockdiv.id = `${day.name}-blocks`;
+  blockdiv.dataset.hours = day.available / 4;
   blockdiv.classList = "block-group";
   p.innerHTML = day.name.toUpperCase();
 
@@ -135,6 +136,7 @@ function displayActivities(day, activity) {
   const blocks = document.createElement("div");
   //
   blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
+  blocks.dataset.hours = day.available /4;
   //
   blocks.classList = "block-group";
 
@@ -164,7 +166,7 @@ function displayActivities(day, activity) {
 function printBlocks(blockNums, div) {
   let blocksDiv = document.getElementById(div);
   let timeTotal = parseFloat(blockNums / 4);
-  const timeRemains = document.getElementById("free-time").value;
+  const dayHours = document.getElementById(div);
 
   blocksDiv.innerHTML = null;
   for (let i = 0; i < blockNums; i++) {
@@ -172,7 +174,7 @@ function printBlocks(blockNums, div) {
     blockDiv.classList = "blocks";
     blocksDiv.append(blockDiv);
   }
-  blocksDiv.append(`${timeTotal} out of ${timeRemains} hour(s)`);
+  blocksDiv.append(`${timeTotal} out of ${dayHours.dataset.hours} hour(s)`);
 }
 
 // error handling

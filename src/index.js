@@ -99,6 +99,9 @@ function displayWeek(day) {
   printBlocks(day.available, `${day.name}-blocks`);
   setDayReset(`${day.name}`);
   displayActivityInput(day);
+  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")){
+    setWeekReset();
+  }
 }
 
 function displayActivityInput(day) {
@@ -227,6 +230,9 @@ function printError(msg) {
 function displayPrioritiesList(e) {
   e.preventDefault();
   const goalDiv = document.querySelector('#goal-list');
+  if (!document.querySelector(".priorityResetButton")) {
+    setPriorityReset();
+  }
   goalDiv.classList.remove("hidden");
   goalDiv.querySelector("ol").innerHTML = null;
   const ol = goalDiv.querySelector("ol");
@@ -266,10 +272,30 @@ function displayInfoPopUp() {
   });
 }
 
-// NEW vv
+// Reset Buttons
+
+
+function priorityReset() {
+  const goalList = document.getElementById("goal-list");
+  const priorityList = document.getElementById("priority-list");
+  goalList.querySelector("ol").innerText = null;
+  priorityList.querySelector("ol").innerText = null;
+
+}
+
+function setPriorityReset() {
+  const priorityResetButton = document.createElement("button");
+  priorityResetButton.innerText = "Reset Goals";
+  priorityResetButton.classList = "priorityResetButton";
+  document.getElementById("goal-list").append(priorityResetButton);
+  priorityResetButton.addEventListener("click", function() {
+    priorityReset();
+  });
+}
+
 
 function dayReset(dayDiv) {
-  document.getElementById(`${dayDiv}`).innerHTML = null;
+  document.getElementById(`${dayDiv}`).remove();
 }
 
 function setDayReset(dayDiv) {
@@ -282,9 +308,23 @@ function setDayReset(dayDiv) {
   });
 }
 
-// NEW ^^
 
+function weekReset() {
+  document.getElementById("week").innerHTML = null;
+}
 
+function setWeekReset() {
+
+  const weekResetButton = document.createElement("button");
+  weekResetButton.innerText = "Reset Week";
+  weekResetButton.classList = "weekResetButton";
+  document.getElementById("week").after(weekResetButton);
+  weekResetButton.addEventListener("click", function() {
+    weekReset();
+  });
+}
+
+// Onload
 
 window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);

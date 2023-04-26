@@ -15,7 +15,7 @@ export default class Storage {
       });
   }
 
-  static newUser(user, userName) {
+  static saveUser(user, userName) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -89,7 +89,7 @@ export default class Storage {
     return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`)
       .then(function (response) {
         if (!response.ok) {
-          const errorMessage = `${response.status} ${response.statusText}`;
+          const errorMessage = `Error ${response.status}`;
           throw new Error(errorMessage);
         } else {
           return response.json();

@@ -10,10 +10,8 @@ import Storage from './storage.js';
 //this is a bad idea but here is a global newWeek
 let user;
 
-
-
-function addUser(user, userName) {
-  Storage.newUser(user, userName)
+function saveUser(user, userName) {
+  Storage.saveUser(user, userName)
     .then(response => {
       if (response.ok) {
         return response;
@@ -23,18 +21,35 @@ function addUser(user, userName) {
     });
 }
 
-// function getUsers() {
-//   Storage.getUsers()
-//     .then(function (response) {
-//       if (response.baskets) {
-//         return response.baskets;
-//       } else {
-//         printError(response);
-//       }
-//     });
-// }
+function getUser(userName) {
+  Storage.getData(userName)
+    .then(function (response) {
+      if (response) {
+        console.log(response.user);
+      } else {
+        console.log(response);
+      }
+    });
+}
 
 
+function newUser() {
+  document.getElementById("welcome").classList = "hidden";
+  document.getElementById("hidden").removeAttribute("id", "hidden");
+}
+
+function existingUser() {
+  document.getElementById("existingUserDiv").removeAttribute("class", "hidden");
+  document.getElementById("loadData").addEventListener("click", findUser);
+}
+
+function findUser(e) {
+  e.preventDefault();
+  document.getElementById("welcome").classList = "hidden";
+  const name = document.getElementById("name").value.toLowerCase();
+  user = getUser(name);
+  console.log(user);
+}
 
 function handleFormSubmission(e) {
   e.preventDefault();
@@ -51,9 +66,7 @@ function handleFormSubmission(e) {
     newWeek.addDay(newDay);
     user = new User(userName);
     user.addWeek(newWeek);
-    console.log(user);
     displayWeek(newDay);
-    addUser(user, userName);
   } catch  (error) {
     printError(error);
   }
@@ -63,7 +76,9 @@ function displayName(userName) {
   document.getElementById("userName").setAttribute("class", "hidden");
   const helloUser = document.createElement("h3");
   helloUser.innerText = `Hello, ${userName}!`;
-  document.querySelector("h4").after(helloUser);
+  const nameDisplay = document.getElementById("userNameDisplay");
+  nameDisplay.innerHTML = null;
+  nameDisplay.append(helloUser);
 
 }
 
@@ -128,9 +143,6 @@ function displayActivityInput(day) {
   form.addEventListener("submit", function (e) {
     getUserInputActivity(e, day);
   });
-  // NEW vv
-
-  // NEW ^^
 }
 
 function getUserInputActivity(e, day) {
@@ -329,4 +341,7 @@ function setWeekReset() {
 window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
+  this.document.getElementById("profileBtn").addEventListener("click", saveUser);
+  this.document.getElementById("newUser").addEventListener("click", newUser);
+  this.document.getElementById("existingUser").addEventListener("click", existingUser);
 });

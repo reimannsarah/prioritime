@@ -10,9 +10,22 @@
   <header>
     <h1>PrioriTime</h1>
     <h4>You will cry with how organized your time has become.</h4>
+    <div id="userNameDisplay"></div>
+    <button id="profileBtn" >Save to profile</button>
   </header>
-
-  <div class="nav">
+  <div id="welcome">
+    <h4>Welcome! Please select an option below if you are a...</h4>
+    <button id="newUser">New User</button>
+    <button id="existingUser">Existing User</button>
+    <div id="existingUserDiv" class="hidden">
+      <form id="existingUserForm">
+        <label for="name">Please enter your name to load your profile:</label>
+        <input type="text" id="name">
+        <button type="submit" id="loadData">Load my data!</button>
+      </form>
+    </div>
+  </div>
+  <div class="nav" id="hidden">
     <form id="free-time-form">
       <input type="text" placeholder="Please Enter Your Name" id="userName" >
       <select id="dayOf">
@@ -26,7 +39,7 @@
         <option value="sunday">Sunday</option>
       </select>
       <label for="free-time">Enter your free time:
-        <input type="number" id="free-time" onfocus="this.value=''">
+        <input type="number" id="free-time" min="0" onfocus="this.value=''">
         <button type="submit">+</button>
       </label>
     </form>

@@ -226,7 +226,7 @@ function displayInfoPopUp() {
 // NEW vv
 
 function dayReset(dayDiv) {
-  document.getElementById(`${dayDiv}`).innerHTML = null;
+  document.getElementById(`${dayDiv}`).remove();
 }
 
 function setDayReset(dayDiv) {

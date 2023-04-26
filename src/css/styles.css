@@ -11,6 +11,7 @@
 
 .hidden {
   display: none;
+  z-index: -1;
 }
 
 body {
@@ -52,6 +53,8 @@ header h4 {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
+  gap: .4em;
+  padding: 20px;
 }
 
 /* popup */
@@ -60,6 +63,7 @@ header h4 {
   grid-area: 2 / 2 / 7 / 7;
   background-color: var(--neutral);
   padding: 20px;
+  z-index: 5;
 }
 
 #exit-popup,
@@ -84,23 +88,47 @@ header h4 {
   cursor: pointer;
 }
 
+#goal-list {
+  grid-area: 1 / 6 / 9 / 9;
+  background-color: var(--dark);
+  color: var(--light);
+  font-size: 1.2em;
+  border-radius: 1em;
+  padding: 1em;
+}
+
 /* week cards */
 #output {
   grid-area: 1 / 1 / 9 / 6;
+
 }
 
 #week {
   display: flex;
   flex-direction: column;
+  gap: 1em;
 }
 
 .week-card {
-  
+  display: flex;
+  flex-direction: column;
+  background-color: var(--yellow);
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 2px 2px 5px var(--neutral);
+}
+
+.week-card > p:first-child {
+  align-self: center;
+  font-size: 1.6em;
+  font-weight: 700;
+  padding: .4em;
 }
 
 .block-group {
   display: flex;
   flex-wrap: wrap;
+  padding: .4em;
 }
 
 .blocks {
@@ -110,7 +138,3 @@ header h4 {
   background-color: var(--green);
 }
 
-#goal-list {
-  grid-area: 1 / 7 / 9 / 9;
-  z-index: 5;
-}

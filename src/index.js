@@ -69,6 +69,7 @@ function displayActivityInput(day) {
   newInput.type = "text";
   newInput.name = "activities";
   newInput.id = `${day.name}-input`;
+  newInput.setAttribute("onfocus", "this.value=''");
 
   label.innerText = "Activity: ";
 
@@ -83,7 +84,7 @@ function displayActivityInput(day) {
 function getUserInputActivity(e, day) {
   e.preventDefault();
   let userActivity = document.querySelector(`#${day.name}-input`).value;
-  document.querySelector("input[name='activities']").value = null;
+  document.querySelector(`#${day.name}-input`).value = null;
   document.querySelector("#error-msg").innerText = null;
   try {
     let validateUserActivity = checkUserActivityInput(userActivity);
@@ -172,10 +173,9 @@ function printError(msg) {
 function displayPrioritiesList(e) {
   e.preventDefault();
   const goalDiv = document.querySelector('#goal-list');
-  goalDiv.innerHTML = null;
-  const ol = document.createElement("ol");
-  goalDiv.append(ol);
-
+  goalDiv.classList.remove("hidden");
+  goalDiv.querySelector("ol").innerHTML = null;
+  const ol = goalDiv.querySelector("ol");
   const items = document.querySelectorAll("input[name='priorities']");
   items.forEach(item => {
     if (item.value) {

@@ -187,6 +187,9 @@ function printError(msg) {
 function displayPrioritiesList(e) {
   e.preventDefault();
   const goalDiv = document.querySelector('#goal-list');
+  if (!document.querySelector(".priorityResetButton")) {
+    setPriorityReset();
+  }
   goalDiv.classList.remove("hidden");
   goalDiv.querySelector("ol").innerHTML = null;
   const ol = goalDiv.querySelector("ol");
@@ -228,6 +231,26 @@ function displayInfoPopUp() {
 
 // Reset Buttons
 
+
+function priorityReset() {
+  const goalList = document.getElementById("goal-list");
+  const priorityList = document.getElementById("priority-list");
+  goalList.querySelector("ol").innerText = null;
+  priorityList.querySelector("ol").innerText = null;
+
+}
+
+function setPriorityReset() {
+  const priorityResetButton = document.createElement("button");
+  priorityResetButton.innerText = "Reset Goals";
+  priorityResetButton.classList = "priorityResetButton";
+  document.getElementById("goal-list").append(priorityResetButton);
+  priorityResetButton.addEventListener("click", function() {
+    priorityReset();
+  });
+}
+
+
 function dayReset(dayDiv) {
   document.getElementById(`${dayDiv}`).remove();
 }
@@ -258,6 +281,7 @@ function setWeekReset() {
   });
 }
 
+// Onload
 
 window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);

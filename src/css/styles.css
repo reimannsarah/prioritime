@@ -46,7 +46,17 @@ header h4 {
 .nav form {
   width: 85vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.nav form input {
+  border-style: none;
+  width: 3em;
+
+}
+
+.nav form label {
+  font-size: 1.5em;
 }
 
 .container-main {

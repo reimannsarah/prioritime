@@ -7,19 +7,8 @@ import Week from './week';
 import User from './user';
 import Storage from './storage.js';
 
-//this is a bad idea but here is a global newWeek
 let user = {};
 
-// function createUser(user, userName) {
-//   Storage.saveUser(user, userName)
-//     .then(response => {
-//       if (response.ok) {
-//         return response;
-//       } else {
-//         printError(response);
-//       }
-//     });
-// }
 
 function saveUser(user, userName) {
   console.log(user);
@@ -66,7 +55,6 @@ function existingUser() {
   document.getElementById("existingUserDiv").removeAttribute("class", "hidden");
   document.getElementById("loadData").addEventListener("click", function (e) {
     e.preventDefault();
-    // const name = findUser();
     user.name = findUser();
     getUser(user.name);
 
@@ -195,10 +183,8 @@ function displayActivities(day, activity) {
   const removeBtn = document.createElement("button");
   const blocks = document.createElement("div");
 
-  // NEW vv
   blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
   blocks.dataset.hours = document.querySelector(`#${day.name}-blocks`).dataset.hours;
-  // NEW ^^
 
   blocks.classList = "block-group";
 

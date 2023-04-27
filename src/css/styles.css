@@ -64,6 +64,7 @@ header h4 {
 .nav {
   margin-top: 12vh;
   padding: 2.5em;
+  z-index: 2;
 }
 
 .nav form {
@@ -182,4 +183,39 @@ header h4 {
   background-color: red;
   border-radius: 50%;
   box-shadow: 2px 2px 2px #4d7c0f; 
+}
+
+.background-images {
+  position: fixed;
+}
+
+.img1 {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/blanch.png");
+  background-size: cover;
+  animation: move 30s linear infinite;
+}
+
+/* .img2 {
+  position: absolute;
+  z-index: -1;
+  top: 20vh;
+  left: 20vw;
+  width: 10vw;
+  height: 10vh;
+  background-image: url("../assets/images/grumbie.png");
+  background-size: cover;
+  animation: move 10s linear infinite;
+} */
+
+@keyframes move{
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
 }

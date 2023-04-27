@@ -169,7 +169,7 @@ function displayActivities(day, activity) {
 
   // NEW vv
   blocks.setAttribute("id", `${activity.name}-${day.name}-blocks`);
-  blocks.dataset.hours = day.available / 4;
+  blocks.dataset.hours = document.querySelector(`#${day.name}-blocks`).dataset.hours;
   // NEW ^^
 
   blocks.classList = "block-group";

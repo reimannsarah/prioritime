@@ -1,6 +1,6 @@
 export default class Storage {
   static getUsers() {
-    return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8`)
+    return fetch(`https://getpantry.cloud/apiv1/pantry/${process.env.PANTRY_ID}`)
       .then(function (response) {
         if (!response.ok) {
           const errorMessage = `Error ${response.status}
@@ -29,7 +29,7 @@ export default class Storage {
       body: raw,
       redirect: 'follow'
     };
-    return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+    return fetch(`https://getpantry.cloud/apiv1/pantry/${process.env.PANTRY_ID}/basket/${userName}`, requestOptions)
       .then(function (response) {
         if (!response.ok) {
           const errorMessage = `Error: ${response.status}
@@ -86,7 +86,7 @@ export default class Storage {
   // }
 
   static getData(userName) {
-    return fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`)
+    return fetch(`https://getpantry.cloud/apiv1/pantry/${process.env.PANTRY_ID}/basket/${userName}`)
       .then(function (response) {
         if (!response.ok) {
           const errorMessage = `Error ${response.status}`;
@@ -113,7 +113,7 @@ export default class Storage {
       redirect: 'follow'
     };
 
-    fetch(`https://getpantry.cloud/apiv1/pantry/c763a4f5-f066-46e7-98d0-ad638c5c0bc8/basket/${userName}`, requestOptions)
+    fetch(`https://getpantry.cloud/apiv1/pantry/${process.env.PANTRY_ID}/basket/${userName}`, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));

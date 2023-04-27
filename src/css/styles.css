@@ -229,6 +229,7 @@ header h4 {
   width: 50vw;
   height: 50vh;
   top: 40vh;
+  right: 5vw;
   background-image: url("../assets/images/punch.png");
   background-size: cover;
   animation: rotate 25s alternate-reverse infinite;

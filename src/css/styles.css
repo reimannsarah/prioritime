@@ -199,17 +199,17 @@ header h4 {
   animation: move 30s linear infinite;
 }
 
-/* .img2 {
+.img2 {
   position: absolute;
   z-index: -1;
   top: 20vh;
   left: 20vw;
-  width: 10vw;
-  height: 10vh;
-  background-image: url("../assets/images/grumbie.png");
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/grambie.png");
   background-size: cover;
   animation: move 10s linear infinite;
-} */
+}
 
 @keyframes move{
   0% {

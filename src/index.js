@@ -191,7 +191,7 @@ function displayActivities(day, activity) {
   removeBtn.addEventListener("click", function () {
     day.subtractActivityBlocks(activity.name);
     printBlocks(day.available, `${day.name}-blocks`);
-    printBlocks(day.activities[activity.name].blocks, `${activity.name}-blocks`);
+    printBlocks(day.activities[activity.name].blocks, `${activity.name}-${day.name}-blocks`);
   });
   const weekCard = document.getElementById(`${day.name}`);
   weekCard.querySelector("form").before(p);

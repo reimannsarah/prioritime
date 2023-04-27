@@ -64,6 +64,7 @@ header h4 {
 .nav {
   margin-top: 12vh;
   padding: 2.5em;
+  z-index: 2;
 }
 
 .nav form {
@@ -157,6 +158,9 @@ header h4 {
   font-size: 1.6em;
   font-weight: 700;
   padding: .4em;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .block-group {
@@ -172,3 +176,119 @@ header h4 {
   background-color: var(--green);
 }
 
+.dayResetButton {
+  width: 40px;
+  height: 40px;
+  border-style: none;
+  background-color: red;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px #4d7c0f; 
+}
+
+.background-images {
+  position: fixed;
+}
+
+.img1 {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/blanch.png");
+  background-size: cover;
+  animation: move 30s linear infinite;
+}
+
+.img2 {
+  position: absolute;
+  z-index: -1;
+  top: 20vh;
+  left: 20vw;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/grambie.png");
+  background-size: cover;
+  animation: move 10s linear infinite;
+}
+
+.img3 {
+  position: absolute;
+  z-index: -1;
+  top:10vh;
+  right:10vw;
+  width: 50vw;
+  height: 50vh;
+  background-image: url("../assets/images/grundle.png");
+  background-size: cover;
+  animation: rotate 15s reverse infinite;
+}
+
+.img4 {
+  position: absolute;
+  z-index: -1;
+  width: 50vw;
+  height: 50vh;
+  top: 40vh;
+  right: 5vw;
+  background-image: url("../assets/images/punch.png");
+  background-size: cover;
+  animation: rotate 25s alternate-reverse infinite;
+}
+.img5 {
+  position: absolute;
+  z-index: -1;
+  top: 35vh;
+  right: 20vw;
+  width: 70vw;
+  height: 70vh;
+  background-image: url("../assets/images/squirm.png");
+  background-size: cover;
+  animation: moveleft 10s linear infinite;
+}
+.img6 {
+  position: absolute;
+  z-index: -1;
+  top: 35vh;
+  right: 20vw;
+  width: 70vw;
+  height: 70vh;
+  background-image: url("../assets/images/qwamp.png");
+  background-size: cover;
+  animation: diagonal 20s linear infinite;
+}
+
+@keyframes move{
+  0% {
+    transform:translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rotate { 100% {
+  transform:rotate(-360deg);
+}}
+
+@keyframes moveleft{
+  from {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  to {
+    -webkit-transform: translateX(-200%);
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes diagonal {
+  from {
+    -webkit-transform: translateX(100%) translateY(-100%);
+    transform: translateX(100%) translateY(-100%);
+  
+  }
+  to {
+    -webkit-transform: translateX(-100%) translateY(100%);
+    transform: translateX(-100%) translateY(100%);
+  }
+}

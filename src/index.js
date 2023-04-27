@@ -273,9 +273,45 @@ function addPriorityInput() {
   div.querySelector("ol").append(li);
 }
 
+function showCharacters() {
+  document.querySelector("#charactersDiv").remove("hidden");
+
+}
+
 function displayInfoPopUp() {
   const infoDiv = document.querySelector("#info-popup");
   infoDiv.classList.remove("hidden");
+
+  // secret character display button
+  // const charactersDiv = document.createElement("div");
+  // charactersDiv.id = "charactersDiv";
+  // charactersDiv.classList = "hidden", "row";
+  // const imgDiv1 = document.createElement("div");
+  // const blanchImg = document.createElement("img");
+  // blanchImg.setAttribute("src", "../assets/images/blanch.png");
+  // blanchImg.setAttribute("alt", "blanch");
+  // blanchImg.addEventListener("click", expandImg(imgs));
+  // imgDiv1.append(blanchImg);
+  // const imgDiv2 = document.createElement("div");
+  // const imgDiv3 = document.createElement("div");
+  // const imgDiv4 = document.createElement("div");
+  // const imgDiv5 = document.createElement("div");
+  // const imgDiv6 = document.createElement("div");
+  // // imgDiv1.classList = "hidden", "column";
+  // // imgDiv2.classList = "hidden", "column";
+  // // imgDiv3.classList = "hidden", "column";
+  // // imgDiv4.classList = "hidden", "column";
+  // // imgDiv5.classList = "hidden", "column";
+  // // imgDiv6.classList = "hidden", "column";
+  // charactersDiv.append(imgDiv1, imgDiv2, imgDiv3, imgDiv4, imgDiv5, imgDiv6);
+  const charButton = document.createElement("button");
+  charButton.innerText = "???";
+  infoDiv.append(charButton);
+  charButton.addEventListener("click", showCharacters);
+
+
+  //
+
   infoDiv.querySelector("#exit-popup").addEventListener("click", exitPopUp);
   infoDiv.querySelector("#add-more-inputs").addEventListener("click", addPriorityInput);
   infoDiv.querySelector("#priority-list").addEventListener('submit', function (e) {
@@ -335,6 +371,9 @@ function setWeekReset() {
     weekReset();
   });
 }
+
+
+
 
 // Onload
 

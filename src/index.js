@@ -312,9 +312,9 @@ function dayReset(dayDiv) {
 
 function setDayReset(dayDiv) {
   const dayResetButton = document.createElement("button");
-  dayResetButton.innerText = "Reset Day";
+  dayResetButton.innerHTML = "&#10005;";
   dayResetButton.classList = "dayResetButton";
-  document.getElementById(dayDiv).append(dayResetButton);
+  document.getElementById(dayDiv).firstChild.append(dayResetButton);
   dayResetButton.addEventListener("click", function() {
     dayReset(dayDiv);
   });

@@ -215,7 +215,7 @@ header h4 {
   position: absolute;
   z-index: -1;
   top:10vh;
-  right:20vw;
+  right:10vw;
   width: 50vw;
   height: 50vh;
   background-image: url("../assets/images/grundle.png");

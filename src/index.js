@@ -8,13 +8,24 @@ import User from './user';
 import Storage from './storage.js';
 
 //this is a bad idea but here is a global newWeek
-let user;
+let user = {};
+
+// function createUser(user, userName) {
+//   Storage.saveUser(user, userName)
+//     .then(response => {
+//       if (response.ok) {
+//         return response;
+//       } else {
+//         printError(response);
+//       }
+//     });
+// }
 
 function saveUser(user, userName) {
   Storage.saveUser(user, userName)
     .then(response => {
       if (response.ok) {
-        return response;
+        console.log(user);
       } else {
         printError(response);
       }
@@ -66,6 +77,7 @@ function handleFormSubmission(e) {
     newWeek.addDay(newDay);
     user = new User(userName);
     user.addWeek(newWeek);
+    console.log(user);
     displayWeek(newDay);
   } catch  (error) {
     printError(error);
@@ -341,7 +353,9 @@ function setWeekReset() {
 window.addEventListener("load", function () {
   document.querySelector("#free-time-form").addEventListener("submit", handleFormSubmission);
   this.document.querySelector("#info").addEventListener("click", displayInfoPopUp);
-  this.document.getElementById("profileBtn").addEventListener("click", saveUser);
+  this.document.getElementById("profileBtn").addEventListener("click", function () {
+    saveUser(user, user.name);
+  });
   this.document.getElementById("newUser").addEventListener("click", newUser);
   this.document.getElementById("existingUser").addEventListener("click", existingUser);
 });

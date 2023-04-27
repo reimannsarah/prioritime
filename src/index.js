@@ -22,10 +22,11 @@ let user = {};
 // }
 
 function saveUser(user, userName) {
+  console.log(user);
   Storage.saveUser(user, userName)
     .then(response => {
       if (response.ok) {
-        console.log(user);
+        printResponse(`${userName}, you saved your profile!`);
       } else {
         printError(response);
       }
@@ -33,12 +34,24 @@ function saveUser(user, userName) {
 }
 
 function getUser(userName) {
+  findUser();
   Storage.getData(userName)
     .then(function (response) {
       if (response) {
-        console.log(response.user);
+        printResponse(`Your profile has loaded below, ${userName}`);
+        document.getElementById("hidden").removeAttribute("id","hidden");
+        document.getElementById("userName").setAttribute("class", "hidden");
+        user = response.user;
+        console.log(user);
+        const weekArray = Object.keys(user.weeks.week_1);
+        weekArray.forEach(day => {
+          const dayArray = Object.keys(user.weeks.week_1[day]);
+          if (dayArray.length !== 0 && day !== 'name') {
+            displayWeek(user.weeks.week_1[day]);
+          }  
+        });
       } else {
-        console.log(response);
+        printError(response);
       }
     });
 }
@@ -51,15 +64,19 @@ function newUser() {
 
 function existingUser() {
   document.getElementById("existingUserDiv").removeAttribute("class", "hidden");
-  document.getElementById("loadData").addEventListener("click", findUser);
+  document.getElementById("loadData").addEventListener("click", function (e) {
+    e.preventDefault();
+    // const name = findUser();
+    user.name = findUser();
+    getUser(user.name);
+
+  });
 }
 
-function findUser(e) {
-  e.preventDefault();
+function findUser() {
   document.getElementById("welcome").classList = "hidden";
   const name = document.getElementById("name").value.toLowerCase();
-  user = getUser(name);
-  console.log(user);
+  return name;
 }
 
 function handleFormSubmission(e) {
@@ -77,9 +94,8 @@ function handleFormSubmission(e) {
     newWeek.addDay(newDay);
     user = new User(userName);
     user.addWeek(newWeek);
-    console.log(user);
     displayWeek(newDay);
-  } catch  (error) {
+  } catch (error) {
     printError(error);
   }
 }
@@ -104,7 +120,7 @@ function checkForDayInstance(value) {
         const errorMsg = `You already have that day!`;
         throw new Error(errorMsg);
       }
-    }); 
+    });
   } return value;
 }
 
@@ -126,7 +142,7 @@ function displayWeek(day) {
   printBlocks(day.available, `${day.name}-blocks`);
   setDayReset(`${day.name}`);
   displayActivityInput(day);
-  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")){
+  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")) {
     setWeekReset();
   }
 }
@@ -244,6 +260,10 @@ function checkUserActivityInput(value) {
   }
 }
 
+function printResponse(msg) {
+  document.querySelector("#userNameDisplay").innerText = msg;
+}
+
 function printError(msg) {
   document.querySelector("#error-msg").innerText = msg.message;
 }
@@ -312,7 +332,7 @@ function setPriorityReset() {
   priorityResetButton.innerText = "Reset Goals";
   priorityResetButton.classList = "priorityResetButton";
   document.getElementById("goal-list").append(priorityResetButton);
-  priorityResetButton.addEventListener("click", function() {
+  priorityResetButton.addEventListener("click", function () {
     priorityReset();
   });
 }
@@ -327,7 +347,7 @@ function setDayReset(dayDiv) {
   dayResetButton.innerText = "Reset Day";
   dayResetButton.classList = "dayResetButton";
   document.getElementById(dayDiv).append(dayResetButton);
-  dayResetButton.addEventListener("click", function() {
+  dayResetButton.addEventListener("click", function () {
     dayReset(dayDiv);
   });
 }
@@ -343,7 +363,7 @@ function setWeekReset() {
   weekResetButton.innerText = "Reset Week";
   weekResetButton.classList = "weekResetButton";
   document.getElementById("week").after(weekResetButton);
-  weekResetButton.addEventListener("click", function() {
+  weekResetButton.addEventListener("click", function () {
     weekReset();
   });
 }

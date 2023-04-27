@@ -88,11 +88,11 @@ export default class Storage {
   static getData(userName) {
     return fetch(`https://getpantry.cloud/apiv1/pantry/${process.env.PANTRY_ID}/basket/${userName}`)
       .then(function (response) {
-        if (!response.ok) {
+        if (response.ok) {
+          return response.json();
+        } else {
           const errorMessage = `Error ${response.status}`;
           throw new Error(errorMessage);
-        } else {
-          return response.json();
         }
       })
       .catch(function (error) {

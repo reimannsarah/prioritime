@@ -292,3 +292,31 @@ header h4 {
     transform: translateX(-100%) translateY(100%);
   }
 }
+
+#guys-div {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--neutral);
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 2px 2px 5px var(--neutral);
+}
+
+#blanchDiv{
+  size: 25%;
+}
+#grambieDiv{
+  size: 25%;
+}
+#punchDiv{
+  size: 25%;
+}
+#grundleDiv{
+  size: 25%;
+}
+#qwampDiv{
+  size: 25%;
+}
+#squirmDiv{
+  size: 25%
+}

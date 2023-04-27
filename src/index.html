@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prioritime</title>
 </head>
+
 <body>
   <div class="background-guys">
     <div class="img1"></div>
@@ -13,13 +15,13 @@
     <div class="img3"></div>
     <div class="img4"></div>
     <div class="img5"></div>
-    <div class="img6"></div> 
+    <div class="img6"></div>
   </div>
   <header>
     <h1>PrioriTime</h1>
     <h4>You will cry with how organized your time has become.</h4>
     <div id="userNameDisplay"></div>
-    <button id="profileBtn" >Save to profile</button>
+    <button id="profileBtn">Save to profile</button>
   </header>
   <div id="welcome">
     <h4>Welcome! Please select an option below if you are a...</h4>
@@ -35,7 +37,7 @@
   </div>
   <div class="nav" id="hidden">
     <form id="free-time-form">
-      <input type="text" placeholder="Please Enter Your Name" id="userName" >
+      <input type="text" placeholder="Please Enter Your Name" id="userName">
       <select id="dayOf">
         <option selected disabled>Please select a day</option>
         <option value="monday">Monday</option>
@@ -52,14 +54,15 @@
       </label>
     </form>
     <button id="info">?</button>
-  </div> 
   </div>
-  
+  </div>
+
   <div class="container-main">
     <div id="info-popup" class="hidden">
       <div id="exit-popup">&#10005;</div>
-      <p>The trick to enjoying your time and making the most of it is to <em>limit your priorities</em>. 
-      <p>List everything you think you want to do here, like become famous, or be a dog walker, or play with your kids more.</p>
+      <p>The trick to enjoying your time and making the most of it is to <em>limit your priorities</em>.
+      <p>List everything you think you want to do here, like become famous, or be a dog walker, or play with your kids
+        more.</p>
       <p>As you allocate your free time refer to this initial list.</p>
       <form id="priority-list">
         <ol>
@@ -73,12 +76,34 @@
         <button type="submit">Generate Priority List</button>
       </form>
     </div>
-    <div id="guy-container" class="hidden"> 
+    <div id="guy-container" class="hidden">
       <div id="guys-div">
-        <img src="../src/assets/images/blanch.png" alt="picture of blanch">
+        <div id="blanchDiv">
+          <img src="./assets/images/blanch.png" alt="picture of blanch">
+          <p>blanch</p>
+        </div>
+        <div id="grambieDiv">
+          <img src="./assets/images/grambie.png" alt="picture of grambie">
+          <p>grambie</p>
+        </div>
+        <div id="grundleDiv">
+          <img src="./assets/images/grundle.png" alt="picture of grundle">
+          <p>grundle</p>
+        </div>
+        <div id="punchDiv">
+          <img src="./assets/images/punch.png" alt="picture of punch">
+          <p>punch</p>
+        </div>
+        <div id="qwampDiv">
+          <img src="./assets/images/qwamp.png" alt="picture of qwamp">
+          <p>qwamp</p>
+        </div>
+        <div id="squirmDiv">
+          <img src="./assets/images/squirm.png" alt="picture of squirm">
+          <p>squirm</p>
+        </div>
       </div>
     </div>
-
     <div id="output">
       <div id="week"></div>
     </div>
@@ -89,4 +114,5 @@
     <div id="error-msg"></div>
   </div>
 </body>
+
 </html>

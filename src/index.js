@@ -67,7 +67,7 @@ function handleFormSubmission(e) {
     user = new User(userName);
     user.addWeek(newWeek);
     displayWeek(newDay);
-  } catch  (error) {
+  } catch (error) {
     printError(error);
   }
 }
@@ -92,7 +92,7 @@ function checkForDayInstance(value) {
         const errorMsg = `You already have that day!`;
         throw new Error(errorMsg);
       }
-    }); 
+    });
   } return value;
 }
 
@@ -114,7 +114,7 @@ function displayWeek(day) {
   printBlocks(day.available, `${day.name}-blocks`);
   setDayReset(`${day.name}`);
   displayActivityInput(day);
-  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")){
+  if (document.getElementById("week").hasChildNodes() && !document.querySelector(".weekResetButton")) {
     setWeekReset();
   }
 }
@@ -273,9 +273,18 @@ function addPriorityInput() {
   div.querySelector("ol").append(li);
 }
 
-function showCharacters() {
-  document.querySelector("#charactersDiv").remove("hidden");
+function hideGuys() {
+  document.querySelector("#guy-container").setAttribute("class", "hidden");
+}
 
+function showCharacters() {
+  document.querySelector("#guy-container").removeAttribute("class", "hidden");
+  const hideGuysBtn = document.createElement("button");
+  hideGuysBtn.innerText = "Hide Guys";
+  document.getElementById("guy-container").append(hideGuysBtn);
+  hideGuysBtn.addEventListener("click", function() {
+    hideGuys();
+  });
 }
 
 function displayInfoPopUp() {
@@ -283,33 +292,10 @@ function displayInfoPopUp() {
   infoDiv.classList.remove("hidden");
 
   // secret character display button
-  // const charactersDiv = document.createElement("div");
-  // charactersDiv.id = "charactersDiv";
-  // charactersDiv.classList = "hidden", "row";
-  // const imgDiv1 = document.createElement("div");
-  // const blanchImg = document.createElement("img");
-  // blanchImg.setAttribute("src", "../assets/images/blanch.png");
-  // blanchImg.setAttribute("alt", "blanch");
-  // blanchImg.addEventListener("click", expandImg(imgs));
-  // imgDiv1.append(blanchImg);
-  // const imgDiv2 = document.createElement("div");
-  // const imgDiv3 = document.createElement("div");
-  // const imgDiv4 = document.createElement("div");
-  // const imgDiv5 = document.createElement("div");
-  // const imgDiv6 = document.createElement("div");
-  // // imgDiv1.classList = "hidden", "column";
-  // // imgDiv2.classList = "hidden", "column";
-  // // imgDiv3.classList = "hidden", "column";
-  // // imgDiv4.classList = "hidden", "column";
-  // // imgDiv5.classList = "hidden", "column";
-  // // imgDiv6.classList = "hidden", "column";
-  // charactersDiv.append(imgDiv1, imgDiv2, imgDiv3, imgDiv4, imgDiv5, imgDiv6);
   const charButton = document.createElement("button");
   charButton.innerText = "???";
   infoDiv.append(charButton);
   charButton.addEventListener("click", showCharacters);
-
-
   //
 
   infoDiv.querySelector("#exit-popup").addEventListener("click", exitPopUp);
@@ -336,7 +322,7 @@ function setPriorityReset() {
   priorityResetButton.innerText = "Reset Goals";
   priorityResetButton.classList = "priorityResetButton";
   document.getElementById("goal-list").append(priorityResetButton);
-  priorityResetButton.addEventListener("click", function() {
+  priorityResetButton.addEventListener("click", function () {
     priorityReset();
   });
 }
@@ -351,7 +337,7 @@ function setDayReset(dayDiv) {
   dayResetButton.innerHTML = "&#10005;";
   dayResetButton.classList = "dayResetButton";
   document.getElementById(dayDiv).firstChild.append(dayResetButton);
-  dayResetButton.addEventListener("click", function() {
+  dayResetButton.addEventListener("click", function () {
     dayReset(dayDiv);
   });
 }
@@ -367,7 +353,7 @@ function setWeekReset() {
   weekResetButton.innerText = "Reset Week";
   weekResetButton.classList = "weekResetButton";
   document.getElementById("week").after(weekResetButton);
-  weekResetButton.addEventListener("click", function() {
+  weekResetButton.addEventListener("click", function () {
     weekReset();
   });
 }

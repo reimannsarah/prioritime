@@ -1,34 +1,46 @@
-# (Application Name)
+# Prioritime
 
-#### (Brief Description of Application)
+#### An app to help you make the most out of your free time.
 
-#### By (Your Name Here)
+#### By Kyle Crawford, Emma Gerigscott, Thomas McDowell, Sarah Reimann
 
 ## Technologies Used
 
-* _List all_
-* _the major technologies_
-* _you used in your project_
-* _here_
+* _HTML_
+* _CSS_
+* _JavaScript_
+* _Webpack_
+* _Dotenv_
+* _npm_
+* _Babel_
+* _ESLint_
+* _Jest_
+* _Pantry_
 
 ## Description
+In this app, you can enter the amount of free time you have on any given day of the week. It will then return an interactive card with your entered free time split into 15 minute blocks (demonstrated by small green squares). You can then add any activities or tasks you would like to accomplish and add and remove time blocks from the listed tasks. There is functionality to create a profile and save your data to that profile. If you leave and come back, you are able to enter the name of your profile and access the data you previously created. 
 
 ## Setup/Installation Requirements
 
+* Clone this repository to your desktop.
+* Navigate to the root of the project directory
 * Install all packages with $ npm install.
-* Build project using webpack with $ npm   run build
+* Create a .env file in the root of the project to save the Pantry ID
+* Navigate to https://getpantry.cloud/#
+* Enter you email address, then a name for your Pantry
+* Save the generated Pantry ID in the .env file as such:
+
+_.env_
+```javascript
+PANTRY_KEY={YOUR PANTRY KEY HERE}
+```
 * Start a development server with $ npm run start
-* Lint JS files in the src folder with $ npm run lint
-* Run tests with Jest using $ npm run test
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* _When accessing an existing user profile, if you add another day, it writes over any day data that user previously had_
+* _When accessing an exisiting user profile, you cannot add more activities to the day object that already exists in that profile_
+*__
 
 ## License
+Copyright (c) 2023 Kyle Crawford, Emma Gerigscott, Thomas McDowell, Sarah Reimann

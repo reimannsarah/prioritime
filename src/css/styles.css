@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;0,900;1,300&display=swap');
 
-#profileBtn {
-  float: right;
-}
 
-#userName {
-  width: 200px;
-  padding: 3px;
-}
 
 :root {
   --green: #4d7c0f;
@@ -39,7 +32,6 @@ header {
   background-color: var(--green);
   width: 100vw;
   color: var(--light);
-  /* height: 200px; */
 }
 
 header h1 {
@@ -55,14 +47,16 @@ header h4 {
 #userNameDisplay {
   float: left;
   width: 40%;
+  padding: 20px;
 }
 
 #welcome {
-  margin-top: 12rem;
+  margin-top: 12.3rem;
+  padding-left: 2em;
 }
 
 .nav {
-  margin-top: 12vh;
+  margin-top: 12.3rem;
   padding: 2.5em;
   z-index: 2;
 }
@@ -70,7 +64,8 @@ header h4 {
 .nav form {
   width: 85vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  gap: 1em;
   margin: 3px;
 }
 
@@ -90,6 +85,15 @@ header h4 {
   grid-template-rows: repeat(8, 1fr);
   gap: .4em;
   padding: 20px;
+}
+
+#profileBtn {
+  float: right;
+}
+
+#userName {
+  width: 200px;
+  padding: 3px;
 }
 
 /* popup */

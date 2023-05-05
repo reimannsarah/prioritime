@@ -1,11 +1,11 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import Day from './day.js';
-import Activity from './activity.js';
-import Week from './week';
-import User from './user';
-import Storage from './storage.js';
+import Day from './js/day.js';
+import Activity from './js/activity.js';
+import Week from './js/week';
+import User from './js/user';
+import Storage from './js/storage.js';
 
 let user = {};
 

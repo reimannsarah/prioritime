@@ -1,8 +1,12 @@
 # Prioritime
+#### By Kyle Crawford, Emma Gerigscott, Thomas McDowell, Sarah Reimann
+
+![sample of webapge](./src/assets/images/prioritime1.gif)
+![sample of webpage](./src/assets/images/prioritime2.gif)
 
 #### An app to help you make the most out of your free time.
 
-#### By Kyle Crawford, Emma Gerigscott, Thomas McDowell, Sarah Reimann
+
 
 ## Technologies Used
 
